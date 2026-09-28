@@ -207,7 +207,8 @@
 .nv-path__line { position: absolute; top: 0; height: 28px; inset-inline-start: calc(50% / var(--n)); width: calc(100% - 100% / var(--n)); overflow: visible; pointer-events: none; }
 .nv-path__line path { fill: none; stroke-width: 3; stroke-linecap: round; vector-effect: non-scaling-stroke; }
 .nv-path__track { stroke: var(--nv-path-track); }
-.nv-path__done { stroke: var(--nv-path); stroke-dasharray: var(--progress, 0) 100; transition: stroke-dasharray var(--nv-duration-path) var(--nv-ease-path); }
+.nv-path__done { stroke: var(--nv-path); clip-path: inset(-40% -2% -40% calc((100 - var(--progress, 0)) * 1%)); transition: clip-path var(--nv-duration-path) var(--nv-ease-path); }
+[dir="ltr"] .nv-path__line { transform: scaleX(-1); }
 .nv-path__steps { position: relative; display: grid; grid-template-columns: repeat(var(--n), 1fr); margin: 0; padding: 0; list-style: none; }
 .nv-path__step { display: grid; justify-items: center; gap: 0.55rem; text-align: center; padding-inline: 0.25rem; }
 .nv-path__peak { width: 28px; height: 28px; display: grid; place-items: center; }

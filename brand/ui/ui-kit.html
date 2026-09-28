@@ -35,6 +35,8 @@ body { background: var(--nv-bg); color: var(--nv-text); }
 .bk-hero__facts { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 2rem; padding: 0; list-style: none; }
 .bk-hero__facts li { border: 1px solid rgba(246, 239, 225, 0.22); border-radius: var(--nv-radius-full); padding: 0.35rem 0.85rem; font-size: 0.875rem; color: #E6ECF2; }
 .bk-hero__facts b { color: var(--nv-gold-300); font-weight: 700; }
+.bk-hero__actions { display: flex; flex-wrap: wrap; gap: 0.7rem; margin-top: 1.6rem; }
+.bk-hero__actions .nv-btn svg { width: 1.15em; height: 1.15em; }
 
 /* layout */
 .bk-layout { max-width: 1320px; margin-inline: auto; padding-inline: var(--nv-gutter); display: grid; grid-template-columns: 230px minmax(0, 1fr); gap: clamp(1.5rem, 3vw, 3.5rem); }
@@ -158,7 +160,7 @@ body { background: var(--nv-bg); color: var(--nv-text); }
 .bk-stage__rule { font-size: 0.95rem; color: var(--nv-text-secondary); max-width: 46ch; }
 .bk-space { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 1.4rem; align-items: start; }
 .bk-space__art { background: var(--nv-parchment); border-radius: var(--nv-radius-lg); padding: 2rem; display: grid; place-items: center; }
-.bk-space__art svg { width: 100%; max-width: 380px; height: auto; overflow: visible; }
+.bk-space__art > svg { width: 100%; max-width: 380px; height: auto; overflow: visible; }
 .bk-table { width: 100%; border-collapse: collapse; font-size: 0.95rem; }
 .bk-table th, .bk-table td { text-align: start; padding: 0.7rem 0.6rem; border-bottom: 1px solid var(--nv-border-subtle); vertical-align: top; }
 .bk-table th { font-size: 0.8125rem; letter-spacing: 0.04em; color: var(--nv-text-muted); font-weight: 700; }
@@ -322,7 +324,7 @@ body { background: var(--nv-bg); color: var(--nv-text); }
 .bk-app figcaption span { font-weight: 400; color: var(--nv-text-muted); }
 .bk-app--4 { grid-column: span 4; } .bk-app--5 { grid-column: span 5; } .bk-app--6 { grid-column: span 6; } .bk-app--7 { grid-column: span 7; } .bk-app--8 { grid-column: span 8; } .bk-app--12 { grid-column: span 12; }
 .bk-desk { background: #E4DCCD; border-radius: var(--nv-radius-lg); padding: clamp(1rem, 0.6rem + 2vw, 2.2rem); display: grid; place-items: center; gap: 1rem; position: relative; overflow: hidden; }
-.mk { container-type: inline-size; max-width: 100%; }
+.mk { container-type: inline-size; width: 100%; max-width: 100%; }
 .mk > * { position: relative; overflow: hidden; box-shadow: 0 1px 2px rgba(10,42,75,0.12), 0 14px 30px -12px rgba(10,42,75,0.35); color: #0A2A4B; font-family: var(--nv-font-sans); }
 .mk .lg { overflow: visible; }
 /* business cards 90x50 */
