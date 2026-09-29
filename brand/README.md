@@ -17,6 +17,7 @@ brand/
 ├── tokens/                tokens.css · tokens.json · tailwind.preset.js
 ├── ui/                    components.css · ui-kit.html
 ├── patterns/              קווי גובה וקו הדרך (SVG)
+├── proposals/             חמש הצעות ללוגו חדש (טיוטות, עדיין לא בשימוש)
 └── source/                הלוגו המקורי (לתיעוד בלבד, לא לשימוש)
 ```
 
@@ -72,3 +73,10 @@ brand/
 - Tailwind: `presets: [require('./brand/tokens/tailwind.preset.js')]` יחד עם `tokens.css`.
 - כל צירופי הצבע הסמנטיים עומדים ב-WCAG AA בשני המצבים.
 - תצוגה של כל הרכיבים: `ui/ui-kit.html`.
+
+## הצעות ללוגו (טיוטות)
+
+בתיקייה `proposals/` יש חמש הצעות ללוגו, כל אחת בצבע ובגרסה לרקע כהה, עם סמל נפרד:
+`refined` (המקור, מחודד) · `path-to-name` (הדרך אל השם) · `seal` (החותם) · `line` (קו אחד) · `book` (הספר והפסגה).
+ההשוואה וההמלצה ב-`proposals/logo-proposals.pdf`.
+אלה טיוטות לבחירה ולא חלק מהמערכת. אחרי הבחירה והליטוש, הלוגו שנבחר יחליף את הקבצים ב-`logo/`.
