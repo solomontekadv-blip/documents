@@ -1,0 +1,45 @@
+/* Netiv icons - עו״ד סולומון טקה | נתיב האומץ
+   33 icons on a 24px grid: a navy line of 1.5px with one gold touch, and 1px of air between them.
+   Usage:
+     <svg class="nv-icon" aria-hidden="true"><use href="/brand/icons/nv-icons.svg#nv-i-lecture"></use></svg>
+   The line takes the text colour (currentColor). The gold follows --nv-icon-accent, then --nv-path from
+   tokens.css (so it switches to the light gold in dark mode), then #CA984D. */
+
+.nv-icon {
+  display: inline-block;
+  inline-size: var(--nv-icon-size, 1.5rem);
+  block-size: var(--nv-icon-size, 1.5rem);
+  flex: none;
+  vertical-align: middle;
+  overflow: visible;
+}
+
+/* sizes: 24 is the default. Below 20px the gold touch gets too small to read.
+   A size class (or --nv-icon-size) on a container sizes every icon inside it. */
+.nv-icon--20 { --nv-icon-size: 1.25rem; }
+.nv-icon--24 { --nv-icon-size: 1.5rem; }
+.nv-icon--32 { --nv-icon-size: 2rem; }
+.nv-icon--48 { --nv-icon-size: 3rem; }
+.nv-icon--64 { --nv-icon-size: 4rem; }
+
+/* colour variants */
+.nv-icon--brand   { color: var(--nv-text, #0A2A4B); }                       /* navy line, even inside a coloured link */
+.nv-icon--on-dark { color: #F6EFE1; --nv-icon-accent: #D9AD69; }         /* on navy or photos */
+.nv-icon--on-light { color: #0A2A4B; --nv-icon-accent: #CA984D; }           /* force the light version */
+.nv-icon--mono    { --nv-icon-accent: currentColor; }                      /* one colour: stamps, small print, gold surfaces */
+
+/* inside brand buttons (components.css) */
+.nv-btn--accent .nv-icon  { --nv-icon-accent: currentColor; }              /* gold on gold would disappear */
+.nv-btn--primary .nv-icon { --nv-icon-accent: #CA984D; }                    /* works on navy and on the dark-mode cream button */
+
+/* an icon in a circle, for lists of contact details or services: <span class="nv-icon-badge nv-icon--32"><svg class="nv-icon">...</svg></span> */
+.nv-icon-badge {
+  display: inline-grid;
+  place-items: center;
+  inline-size: calc(var(--nv-icon-size, 1.5rem) * 2);
+  block-size: calc(var(--nv-icon-size, 1.5rem) * 2);
+  border-radius: 50%;
+  background: var(--nv-bg-subtle, #F6EFE1);
+  color: var(--nv-text, #0A2A4B);
+  flex: none;
+}

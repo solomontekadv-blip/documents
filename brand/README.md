@@ -14,6 +14,7 @@ brand/
 │   ├── png/               תמונה שקופה ברזולוציה גבוהה
 │   ├── pdf/               וקטור לבית הדפוס
 │   └── favicon/           פביקון ואייקונים לאתר
+├── icons/                 33 אייקונים: SVG, PNG, ספרייה לאתר וכיסויים להיילייטס
 ├── tokens/                tokens.css · tokens.json · tailwind.preset.js
 ├── ui/                    components.css · ui-kit.html
 ├── patterns/              קווי גובה וקו הדרך (SVG)
@@ -56,12 +57,27 @@ brand/
 
 שניהם חינמיים. במחשב בלי הגופנים: Arial במקום Assistant, ו-David במקום Frank Ruhl Libre.
 
+## אייקונים
+
+33 אייקונים בשפת הלוגו: קו נייבי, נגיעת זהב אחת (הדרך, פסגה או נקודה), ואוויר ביניהם. חמש קבוצות: הרצאות, ספר ועריכת דין · קהלים וערכים · יצירת קשר ופרטים · רשתות חברתיות · תוכן והיילייטס.
+
+| שימוש | קבצים |
+|---|---|
+| אתר | `icons/nv-icons.svg` (ספרייה אחת) + `icons/icons.css` |
+| מצגות (PowerPoint, Keynote, Google Slides) | `icons/png/` (שקוף, 512px), לרקע כהה `icons/png-reversed/` |
+| מעצבים, פיגמה | `icons/svg/` · `icons/svg-reversed/` · `icons/svg-mono/` |
+| היילייטס באינסטגרם | `icons/highlights/navy/` או `icons/highlights/parchment/` (1080x1920) |
+| הכל בקובץ אחד | `icons/netiv-icons.zip` |
+
+גודל רגיל 24px, מינימום 20px (מתחת לזה, בצבע אחד). תצוגה של כל הסט עם חיפוש והעתקת קוד: `icons/index.html`. הפירוט ב-`icons/README.md`, והכללים המלאים בפרק 6 של ספר המותג.
+
 ## בקוד
 
 ```html
 <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;500;600;700;800&family=Frank+Ruhl+Libre:wght@400;500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="brand/tokens/tokens.css">
 <link rel="stylesheet" href="brand/ui/components.css">
+<link rel="stylesheet" href="brand/icons/icons.css">
 
 <body class="nv" dir="rtl" lang="he">
   <a class="nv-btn nv-btn--accent" href="#booking">הזמנת הרצאה</a>
