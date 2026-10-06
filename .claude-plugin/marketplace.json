@@ -1,0 +1,5 @@
+{
+  "name": "solomon-mods",
+  "owner": { "name": "solomontekadv-blip" },
+  "plugins": [{ "name": "cost-meter", "source": "./plugins/cost-meter" }]
+}

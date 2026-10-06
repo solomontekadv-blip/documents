@@ -1,0 +1,9 @@
+{
+  "name": "cost-meter",
+  "version": "0.1.0",
+  "description": "Shows above the prompt what this conversation has cost so far, with an everyday comparison",
+  "types": "./types/index.d.ts",
+  "author": {
+    "name": "solomontekadv-blip"
+  }
+}
