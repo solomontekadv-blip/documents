@@ -1,0 +1,7 @@
+{
+  "name": "flyover-book",
+  "private": true,
+  "type": "module",
+  "description": "3D fly-over Reel of the נתיב האומץ landing page",
+  "dependencies": { "playwright": "1.56.1" }
+}
