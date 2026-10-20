@@ -1,7 +1,7 @@
 {
   "name": "instagram-agent-he",
   "description": "13 סקילים לניהול חשבון אינסטגרם של עורך דין בעברית: רילס, כיתובים, קרוסלות, סטוריז, תגובות, DM, תכנון, ציון פרופיל וביקורת, עם שכבת ציות לכללי הפרסומת של לשכת עורכי הדין.",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "author": {
     "name": "Soli Teka (Hebrew adaptation); original by Jake Schincariol"
   },
