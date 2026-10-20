@@ -1,0 +1,1809 @@
+{
+  "version": "1.0",
+  "note": "Lexicon used by humanize.py and detect.py. Replacements are plain words and keep the sentence grammatical. The last block of each English list is Instagram-specific. Entries with \"lang\": \"he\" are Hebrew: matched prefix-aware (ובעולם של היום matches בעולם של היום), a trailing lone ש/ל/ב is glued to the next word, and \"regex\": true entries are used as written. \"flagged\" words are reported, never replaced, because they are often fine. Edit freely - it is meant to be yours.",
+  "invisible": [
+    {
+      "cp": "U+200B",
+      "name": "ZERO WIDTH SPACE",
+      "action": "delete"
+    },
+    {
+      "cp": "U+200C",
+      "name": "ZERO WIDTH NON-JOINER",
+      "action": "delete"
+    },
+    {
+      "cp": "U+200D",
+      "name": "ZERO WIDTH JOINER",
+      "action": "delete"
+    },
+    {
+      "cp": "U+2060",
+      "name": "WORD JOINER",
+      "action": "delete"
+    },
+    {
+      "cp": "U+FEFF",
+      "name": "ZERO WIDTH NO-BREAK SPACE / BOM",
+      "action": "delete"
+    },
+    {
+      "cp": "U+00AD",
+      "name": "SOFT HYPHEN",
+      "action": "delete"
+    },
+    {
+      "cp": "U+180E",
+      "name": "MONGOLIAN VOWEL SEPARATOR",
+      "action": "delete"
+    },
+    {
+      "cp": "U+061C",
+      "name": "ARABIC LETTER MARK",
+      "action": "delete"
+    },
+    {
+      "cp": "U+200E",
+      "name": "LEFT-TO-RIGHT MARK",
+      "action": "keep"
+    },
+    {
+      "cp": "U+200F",
+      "name": "RIGHT-TO-LEFT MARK",
+      "action": "keep"
+    },
+    {
+      "cp": "U+202A-U+202E",
+      "name": "BIDI EMBEDDING / OVERRIDE (LRE RLE PDF LRO RLO)",
+      "action": "delete"
+    },
+    {
+      "cp": "U+2066-U+2069",
+      "name": "BIDI ISOLATE (LRI RLI FSI PDI)",
+      "action": "delete"
+    },
+    {
+      "cp": "U+E0000-U+E007F",
+      "name": "TAG CHARACTERS (invisible ASCII smuggling)",
+      "action": "delete"
+    },
+    {
+      "cp": "U+00A0",
+      "name": "NO-BREAK SPACE",
+      "action": "space"
+    },
+    {
+      "cp": "U+202F",
+      "name": "NARROW NO-BREAK SPACE",
+      "action": "space"
+    },
+    {
+      "cp": "U+2009",
+      "name": "THIN SPACE",
+      "action": "space"
+    },
+    {
+      "cp": "U+2007",
+      "name": "FIGURE SPACE",
+      "action": "space"
+    },
+    {
+      "cp": "U+2003",
+      "name": "EM SPACE",
+      "action": "space"
+    },
+    {
+      "cp": "U+2002",
+      "name": "EN SPACE",
+      "action": "space"
+    },
+    {
+      "cp": "U+2063",
+      "name": "INVISIBLE SEPARATOR",
+      "action": "delete"
+    }
+  ],
+  "typographic": [
+    {
+      "from": "\u2014",
+      "name": "EM DASH",
+      "to": " - "
+    },
+    {
+      "from": "\u2013",
+      "name": "EN DASH",
+      "to": "-"
+    },
+    {
+      "from": "‘",
+      "name": "LEFT SINGLE QUOTE",
+      "to": "'"
+    },
+    {
+      "from": "’",
+      "name": "RIGHT SINGLE QUOTE",
+      "to": "'"
+    },
+    {
+      "from": "“",
+      "name": "LEFT DOUBLE QUOTE",
+      "to": "\""
+    },
+    {
+      "from": "”",
+      "name": "RIGHT DOUBLE QUOTE",
+      "to": "\""
+    },
+    {
+      "from": "…",
+      "name": "HORIZONTAL ELLIPSIS",
+      "to": "..."
+    },
+    {
+      "from": "′",
+      "name": "PRIME",
+      "to": "'"
+    },
+    {
+      "from": "·",
+      "name": "MIDDLE DOT",
+      "to": "-"
+    },
+    {
+      "from": "•",
+      "name": "BULLET",
+      "to": "-"
+    },
+    {
+      "from": "→",
+      "name": "RIGHTWARDS ARROW",
+      "to": "->"
+    },
+    {
+      "from": "״",
+      "name": "HEBREW PUNCTUATION GERSHAYIM",
+      "to": "\""
+    },
+    {
+      "from": "׳",
+      "name": "HEBREW PUNCTUATION GERESH",
+      "to": "'"
+    }
+  ],
+  "words": [
+    {
+      "find": "delve into",
+      "replace": "look at",
+      "family": "verbs"
+    },
+    {
+      "find": "delve",
+      "replace": "look",
+      "family": "verbs"
+    },
+    {
+      "find": "dive deep into",
+      "replace": "get into",
+      "family": "verbs"
+    },
+    {
+      "find": "deep dive",
+      "replace": "breakdown",
+      "family": "nouns"
+    },
+    {
+      "find": "leverage",
+      "replace": "use",
+      "family": "verbs"
+    },
+    {
+      "find": "leveraging",
+      "replace": "using",
+      "family": "verbs"
+    },
+    {
+      "find": "utilize",
+      "replace": "use",
+      "family": "verbs"
+    },
+    {
+      "find": "utilizing",
+      "replace": "using",
+      "family": "verbs"
+    },
+    {
+      "find": "harness",
+      "replace": "use",
+      "family": "verbs"
+    },
+    {
+      "find": "embark on",
+      "replace": "start",
+      "family": "verbs"
+    },
+    {
+      "find": "foster",
+      "replace": "build",
+      "family": "verbs"
+    },
+    {
+      "find": "facilitate",
+      "replace": "help",
+      "family": "verbs"
+    },
+    {
+      "find": "showcase",
+      "replace": "show",
+      "family": "verbs"
+    },
+    {
+      "find": "unlock",
+      "replace": "get",
+      "family": "verbs"
+    },
+    {
+      "find": "elevate",
+      "replace": "improve",
+      "family": "verbs"
+    },
+    {
+      "find": "streamline",
+      "replace": "simplify",
+      "family": "verbs"
+    },
+    {
+      "find": "spearhead",
+      "replace": "lead",
+      "family": "verbs"
+    },
+    {
+      "find": "underscore",
+      "replace": "show",
+      "family": "verbs"
+    },
+    {
+      "find": "underscores",
+      "replace": "shows",
+      "family": "verbs"
+    },
+    {
+      "find": "cultivate",
+      "replace": "build",
+      "family": "verbs"
+    },
+    {
+      "find": "amplify",
+      "replace": "boost",
+      "family": "verbs"
+    },
+    {
+      "find": "curate",
+      "replace": "pick",
+      "family": "verbs"
+    },
+    {
+      "find": "curated",
+      "replace": "picked",
+      "family": "verbs"
+    },
+    {
+      "find": "empower",
+      "replace": "let",
+      "family": "verbs"
+    },
+    {
+      "find": "revolutionize",
+      "replace": "change",
+      "family": "verbs"
+    },
+    {
+      "find": "transformative",
+      "replace": "big",
+      "family": "adjectives"
+    },
+    {
+      "find": "robust",
+      "replace": "solid",
+      "family": "adjectives"
+    },
+    {
+      "find": "seamless",
+      "replace": "clean",
+      "family": "adjectives"
+    },
+    {
+      "find": "seamlessly",
+      "replace": "cleanly",
+      "family": "adjectives"
+    },
+    {
+      "find": "pivotal",
+      "replace": "key",
+      "family": "adjectives"
+    },
+    {
+      "find": "crucial",
+      "replace": "important",
+      "family": "adjectives"
+    },
+    {
+      "find": "vital",
+      "replace": "important",
+      "family": "adjectives"
+    },
+    {
+      "find": "comprehensive",
+      "replace": "complete",
+      "family": "adjectives"
+    },
+    {
+      "find": "cutting-edge",
+      "replace": "new",
+      "family": "adjectives"
+    },
+    {
+      "find": "game-changing",
+      "replace": "big",
+      "family": "adjectives"
+    },
+    {
+      "find": "game-changer",
+      "replace": "big deal",
+      "family": "nouns"
+    },
+    {
+      "find": "groundbreaking",
+      "replace": "new",
+      "family": "adjectives"
+    },
+    {
+      "find": "unparalleled",
+      "replace": "unmatched",
+      "family": "adjectives"
+    },
+    {
+      "find": "invaluable",
+      "replace": "useful",
+      "family": "adjectives"
+    },
+    {
+      "find": "meticulous",
+      "replace": "careful",
+      "family": "adjectives"
+    },
+    {
+      "find": "meticulously",
+      "replace": "carefully",
+      "family": "adjectives"
+    },
+    {
+      "find": "myriad of",
+      "replace": "many",
+      "family": "adjectives"
+    },
+    {
+      "find": "myriad",
+      "replace": "many",
+      "family": "adjectives"
+    },
+    {
+      "find": "multifaceted",
+      "replace": "complicated",
+      "family": "adjectives"
+    },
+    {
+      "find": "holistic",
+      "replace": "whole",
+      "family": "adjectives"
+    },
+    {
+      "find": "bespoke",
+      "replace": "custom",
+      "family": "adjectives"
+    },
+    {
+      "find": "innovative",
+      "replace": "new",
+      "family": "adjectives"
+    },
+    {
+      "find": "profound",
+      "replace": "big",
+      "family": "adjectives"
+    },
+    {
+      "find": "remarkable",
+      "replace": "notable",
+      "family": "adjectives"
+    },
+    {
+      "find": "compelling",
+      "replace": "convincing",
+      "family": "adjectives"
+    },
+    {
+      "find": "tapestry",
+      "replace": "mix",
+      "family": "nouns"
+    },
+    {
+      "find": "realm",
+      "replace": "world",
+      "family": "nouns"
+    },
+    {
+      "find": "landscape",
+      "replace": "market",
+      "family": "nouns"
+    },
+    {
+      "find": "journey",
+      "replace": "process",
+      "family": "nouns"
+    },
+    {
+      "find": "testament to",
+      "replace": "proof of",
+      "family": "nouns"
+    },
+    {
+      "find": "cornerstone",
+      "replace": "base",
+      "family": "nouns"
+    },
+    {
+      "find": "beacon",
+      "replace": "signal",
+      "family": "nouns"
+    },
+    {
+      "find": "paradigm",
+      "replace": "model",
+      "family": "nouns"
+    },
+    {
+      "find": "synergy",
+      "replace": "overlap",
+      "family": "nouns"
+    },
+    {
+      "find": "ecosystem",
+      "replace": "system",
+      "family": "nouns"
+    },
+    {
+      "find": "treasure trove",
+      "replace": "pile",
+      "family": "nouns"
+    },
+    {
+      "find": "plethora of",
+      "replace": "lots of",
+      "family": "nouns"
+    },
+    {
+      "find": "plethora",
+      "replace": "lots",
+      "family": "nouns"
+    },
+    {
+      "find": "arsenal",
+      "replace": "set",
+      "family": "nouns"
+    },
+    {
+      "find": "north star",
+      "replace": "goal",
+      "family": "nouns"
+    },
+    {
+      "find": "moreover",
+      "replace": "also",
+      "family": "connectives"
+    },
+    {
+      "find": "furthermore",
+      "replace": "also",
+      "family": "connectives"
+    },
+    {
+      "find": "additionally",
+      "replace": "also",
+      "family": "connectives"
+    },
+    {
+      "find": "nevertheless",
+      "replace": "still",
+      "family": "connectives"
+    },
+    {
+      "find": "consequently",
+      "replace": "so",
+      "family": "connectives"
+    },
+    {
+      "find": "thus",
+      "replace": "so",
+      "family": "connectives"
+    },
+    {
+      "find": "hence",
+      "replace": "so",
+      "family": "connectives"
+    },
+    {
+      "find": "notably",
+      "replace": "",
+      "family": "connectives"
+    },
+    {
+      "find": "importantly",
+      "replace": "",
+      "family": "connectives"
+    },
+    {
+      "find": "ultimately",
+      "replace": "in the end",
+      "family": "connectives"
+    },
+    {
+      "find": "in essence",
+      "replace": "basically",
+      "family": "connectives"
+    },
+    {
+      "find": "in conclusion",
+      "replace": "so",
+      "family": "connectives"
+    },
+    {
+      "find": "when it comes to",
+      "replace": "with",
+      "family": "connectives"
+    },
+    {
+      "find": "in order to",
+      "replace": "to",
+      "family": "connectives"
+    },
+    {
+      "find": "a wide range of",
+      "replace": "many",
+      "family": "connectives"
+    },
+    {
+      "find": "it is worth noting that",
+      "replace": "note that",
+      "family": "connectives"
+    },
+    {
+      "find": "supercharge",
+      "replace": "speed up",
+      "family": "verbs"
+    },
+    {
+      "find": "skyrocket",
+      "replace": "raise",
+      "family": "verbs"
+    },
+    {
+      "find": "unleash",
+      "replace": "release",
+      "family": "verbs"
+    },
+    {
+      "find": "effortlessly",
+      "replace": "easily",
+      "family": "adjectives"
+    },
+    {
+      "find": "captivating",
+      "replace": "interesting",
+      "family": "adjectives"
+    },
+    {
+      "find": "stunning",
+      "replace": "good",
+      "family": "adjectives"
+    },
+    {
+      "find": "breathtaking",
+      "replace": "striking",
+      "family": "adjectives"
+    },
+    {
+      "find": "iconic",
+      "replace": "known",
+      "family": "adjectives"
+    },
+    {
+      "find": "must-have",
+      "replace": "worth having",
+      "family": "adjectives"
+    },
+    {
+      "find": "no-brainer",
+      "replace": "obvious",
+      "family": "nouns"
+    },
+    {
+      "find": "hidden gem",
+      "replace": "good one",
+      "family": "nouns"
+    },
+    {
+      "find": "secret sauce",
+      "replace": "the actual method",
+      "family": "nouns"
+    },
+    {
+      "find": "ultimate guide",
+      "replace": "guide",
+      "family": "nouns"
+    },
+    {
+      "find": "level up",
+      "replace": "improve",
+      "family": "verbs"
+    },
+    {
+      "find": "hack",
+      "replace": "trick",
+      "family": "nouns"
+    },
+    {
+      "find": "למנף",
+      "replace": "לנצל",
+      "family": "verbs",
+      "lang": "he"
+    },
+    {
+      "find": "ממנ(?:ף|פ(?P<s>ים|ת))",
+      "replace": "מנצל\\g<s>",
+      "family": "verbs",
+      "lang": "he",
+      "regex": true,
+      "label": "ממנף / ממנפת / ממנפים"
+    },
+    {
+      "find": "מינוף",
+      "replace": "שימוש",
+      "family": "nouns",
+      "lang": "he"
+    },
+    {
+      "find": "להעצים",
+      "replace": "לחזק",
+      "family": "verbs",
+      "lang": "he"
+    },
+    {
+      "find": "מעצי(?:ם|מ(?P<s>ים))",
+      "replace": "מחזק\\g<s>",
+      "family": "verbs",
+      "lang": "he",
+      "regex": true,
+      "label": "מעצים / מעצימים"
+    },
+    {
+      "find": "מעצימה",
+      "replace": "מחזקת",
+      "family": "verbs",
+      "lang": "he"
+    },
+    {
+      "find": "להזניק",
+      "replace": "לקדם",
+      "family": "verbs",
+      "lang": "he"
+    },
+    {
+      "find": "לרתום",
+      "replace": "לגייס",
+      "family": "verbs",
+      "lang": "he"
+    },
+    {
+      "find": "לצלול לעומק",
+      "replace": "להיכנס לפרטים",
+      "family": "verbs",
+      "lang": "he"
+    },
+    {
+      "find": "נצלול לעומק",
+      "replace": "נעבור על הפרטים",
+      "family": "verbs",
+      "lang": "he"
+    },
+    {
+      "find": "נצלול לתוך",
+      "replace": "נעבור על",
+      "family": "verbs",
+      "lang": "he"
+    },
+    {
+      "find": "(?P<v>לפתוח|לממש|נפתח|נממש|תפתחו|פתחו|תממשו)\\s+את\\s+(?:מלוא\\s+)?הפוטנציאל(?:\\s+(?:שלכם|שלך|שלנו|שלו|שלה))?",
+      "replace": "\\g<v> דלת",
+      "family": "verbs",
+      "lang": "he",
+      "regex": true,
+      "label": "לפתוח / נפתח את הפוטנציאל"
+    },
+    {
+      "find": "לקחת\\s+את\\s+(?P<x>\\S+(?:\\s+(?:שלכם|שלך|שלנו))?)\\s+לשלב\\s+הבא",
+      "replace": "לשפר את \\g<x>",
+      "family": "verbs",
+      "lang": "he",
+      "regex": true,
+      "label": "לקחת את X לשלב הבא"
+    },
+    {
+      "find": "אופטימלי",
+      "replace": "נכון",
+      "family": "adjectives",
+      "lang": "he"
+    },
+    {
+      "find": "אופטימלית",
+      "replace": "נכונה",
+      "family": "adjectives",
+      "lang": "he"
+    },
+    {
+      "find": "אופטימליים",
+      "replace": "נכונים",
+      "family": "adjectives",
+      "lang": "he"
+    },
+    {
+      "find": "הוליסטי",
+      "replace": "כולל",
+      "family": "adjectives",
+      "lang": "he"
+    },
+    {
+      "find": "הוליסטית",
+      "replace": "כוללת",
+      "family": "adjectives",
+      "lang": "he"
+    },
+    {
+      "find": "משנה משחק",
+      "replace": "משנה הרבה",
+      "family": "adjectives",
+      "lang": "he"
+    },
+    {
+      "find": "משנה את כללי המשחק",
+      "replace": "משנה הרבה",
+      "family": "adjectives",
+      "lang": "he"
+    },
+    {
+      "find": "גיים[-\\s]?צ'יינג'ר",
+      "replace": "שינוי גדול",
+      "family": "nouns",
+      "lang": "he",
+      "regex": true,
+      "label": "גיים צ'יינג'ר"
+    },
+    {
+      "find": "פורץ דרך",
+      "replace": "חדש",
+      "family": "adjectives",
+      "lang": "he"
+    },
+    {
+      "find": "פורצת דרך",
+      "replace": "חדשה",
+      "family": "adjectives",
+      "lang": "he"
+    },
+    {
+      "find": "פורצי דרך",
+      "replace": "חדשים",
+      "family": "adjectives",
+      "lang": "he"
+    },
+    {
+      "find": "חדשני",
+      "replace": "חדש",
+      "family": "adjectives",
+      "lang": "he"
+    },
+    {
+      "find": "חדשנית",
+      "replace": "חדשה",
+      "family": "adjectives",
+      "lang": "he"
+    },
+    {
+      "find": "חדשניים",
+      "replace": "חדשים",
+      "family": "adjectives",
+      "lang": "he"
+    },
+    {
+      "find": "מהפכני",
+      "replace": "חדש",
+      "family": "adjectives",
+      "lang": "he"
+    },
+    {
+      "find": "עוצמתי",
+      "replace": "חזק",
+      "family": "adjectives",
+      "lang": "he"
+    },
+    {
+      "find": "עוצמתית",
+      "replace": "חזקה",
+      "family": "adjectives",
+      "lang": "he"
+    },
+    {
+      "find": "בצורה חלקה",
+      "replace": "בלי תקלות",
+      "family": "adjectives",
+      "lang": "he"
+    },
+    {
+      "find": "(?:ללא|בלי)\\s+(?:שום\\s+)?מאמץ",
+      "replace": "בקלות",
+      "family": "adjectives",
+      "lang": "he",
+      "regex": true,
+      "label": "ללא מאמץ"
+    },
+    {
+      "find": "בצורה אופטימלית",
+      "replace": "כמו שצריך",
+      "family": "adjectives",
+      "lang": "he"
+    },
+    {
+      "find": "(?:בצורה|באופן)\\s+משמעותי(?:ת)?",
+      "replace": "הרבה",
+      "family": "adjectives",
+      "lang": "he",
+      "regex": true,
+      "label": "בצורה משמעותית"
+    },
+    {
+      "find": "אקוסיסטם|מערכת\\s+אקולוגית",
+      "replace": "מערכת",
+      "family": "nouns",
+      "lang": "he",
+      "regex": true,
+      "label": "אקוסיסטם"
+    },
+    {
+      "find": "סינרגיה",
+      "replace": "שיתוף פעולה",
+      "family": "nouns",
+      "lang": "he"
+    },
+    {
+      "find": "פרדיגמה",
+      "replace": "גישה",
+      "family": "nouns",
+      "lang": "he"
+    },
+    {
+      "find": "אבן יסוד",
+      "replace": "בסיס",
+      "family": "nouns",
+      "lang": "he"
+    },
+    {
+      "find": "הרוטב הסודי",
+      "replace": "השיטה",
+      "family": "nouns",
+      "lang": "he"
+    },
+    {
+      "find": "המדריך המלא ל",
+      "replace": "מדריך ל",
+      "family": "nouns",
+      "lang": "he"
+    },
+    {
+      "find": "המדריך\\s+(?:המלא|האולטימטיבי|המקיף)",
+      "replace": "מדריך",
+      "family": "nouns",
+      "lang": "he",
+      "regex": true,
+      "label": "המדריך המלא"
+    },
+    {
+      "find": "הסוד\\s+ל(?!א(?![\\w]))",
+      "replace": "המפתח ל",
+      "family": "nouns",
+      "lang": "he",
+      "regex": true,
+      "label": "הסוד ל",
+      "glued": true
+    },
+    {
+      "find": "במרחב הדיגיטלי",
+      "replace": "ברשת",
+      "family": "nouns",
+      "lang": "he"
+    },
+    {
+      "find": "במרחב\\s+ה(?=[א-ת])",
+      "replace": "בתחום ה",
+      "family": "nouns",
+      "lang": "he",
+      "regex": true,
+      "label": "במרחב ה...",
+      "glued": true
+    },
+    {
+      "find": "בנוף\\s+(?:ה)?משתנה\\s+של\\s+|בנוף\\s+ה(?=[א-ת])",
+      "replace": "בתחום ה",
+      "family": "nouns",
+      "lang": "he",
+      "regex": true,
+      "label": "בנוף ה...",
+      "glued": true
+    }
+  ],
+  "phrases": [
+    {
+      "find": "in today's fast-paced world",
+      "replace": "right now",
+      "family": "openers"
+    },
+    {
+      "find": "in today's digital age",
+      "replace": "right now",
+      "family": "openers"
+    },
+    {
+      "find": "in the ever-evolving landscape of",
+      "replace": "in",
+      "family": "openers"
+    },
+    {
+      "find": "in the ever-changing world of",
+      "replace": "in",
+      "family": "openers"
+    },
+    {
+      "find": "let's face it",
+      "replace": "",
+      "family": "openers"
+    },
+    {
+      "find": "here's the thing",
+      "replace": "",
+      "family": "openers"
+    },
+    {
+      "find": "picture this",
+      "replace": "",
+      "family": "openers"
+    },
+    {
+      "find": "imagine a world where",
+      "replace": "imagine if",
+      "family": "openers"
+    },
+    {
+      "find": "it's no secret that",
+      "replace": "",
+      "family": "openers"
+    },
+    {
+      "find": "we've all been there",
+      "replace": "",
+      "family": "openers"
+    },
+    {
+      "find": "let that sink in",
+      "replace": "",
+      "family": "closers"
+    },
+    {
+      "find": "the choice is yours",
+      "replace": "",
+      "family": "closers"
+    },
+    {
+      "find": "food for thought",
+      "replace": "",
+      "family": "closers"
+    },
+    {
+      "find": "the future is here",
+      "replace": "",
+      "family": "closers"
+    },
+    {
+      "find": "what are your thoughts?",
+      "replace": "",
+      "family": "closers"
+    },
+    {
+      "find": "drop a comment below",
+      "replace": "",
+      "family": "closers"
+    },
+    {
+      "find": "at the end of the day",
+      "replace": "",
+      "family": "closers"
+    },
+    {
+      "find": "needle-moving",
+      "replace": "useful",
+      "family": "closers"
+    },
+    {
+      "find": "move the needle",
+      "replace": "make a difference",
+      "family": "closers"
+    },
+    {
+      "find": "a testament to",
+      "replace": "proof of",
+      "family": "nouns"
+    },
+    {
+      "find": "had the opportunity to",
+      "replace": "got to",
+      "family": "connectives"
+    },
+    {
+      "find": "i am excited to announce",
+      "replace": "",
+      "family": "openers"
+    },
+    {
+      "find": "i'm thrilled to share",
+      "replace": "",
+      "family": "openers"
+    },
+    {
+      "find": "i am humbled to",
+      "replace": "",
+      "family": "openers"
+    },
+    {
+      "find": "without further ado",
+      "replace": "",
+      "family": "openers"
+    },
+    {
+      "find": "buckle up",
+      "replace": "",
+      "family": "openers"
+    },
+    {
+      "find": "the harsh truth is",
+      "replace": "",
+      "family": "openers"
+    },
+    {
+      "find": "spoiler alert",
+      "replace": "",
+      "family": "openers"
+    },
+    {
+      "find": "read that again",
+      "replace": "",
+      "family": "closers"
+    },
+    {
+      "find": "you're welcome",
+      "replace": "",
+      "family": "closers"
+    },
+    {
+      "find": "save this for later",
+      "replace": "",
+      "family": "closers"
+    },
+    {
+      "find": "who's with me",
+      "replace": "",
+      "family": "closers"
+    },
+    {
+      "find": "stop scrolling",
+      "replace": "",
+      "family": "openers"
+    },
+    {
+      "find": "don't scroll past this",
+      "replace": "",
+      "family": "openers"
+    },
+    {
+      "find": "in this video i'm going to show you",
+      "replace": "",
+      "family": "openers"
+    },
+    {
+      "find": "in today's video",
+      "replace": "",
+      "family": "openers"
+    },
+    {
+      "find": "watch till the end",
+      "replace": "",
+      "family": "openers"
+    },
+    {
+      "find": "you won't believe",
+      "replace": "",
+      "family": "openers"
+    },
+    {
+      "find": "nobody is talking about this",
+      "replace": "few people do this",
+      "family": "openers"
+    },
+    {
+      "find": "no one is talking about this",
+      "replace": "few people do this",
+      "family": "openers"
+    },
+    {
+      "find": "this changed everything",
+      "replace": "this worked",
+      "family": "openers"
+    },
+    {
+      "find": "this is your sign to",
+      "replace": "",
+      "family": "openers"
+    },
+    {
+      "find": "little did i know",
+      "replace": "",
+      "family": "connectives"
+    },
+    {
+      "find": "fast forward to today",
+      "replace": "now",
+      "family": "connectives"
+    },
+    {
+      "find": "and just like that",
+      "replace": "",
+      "family": "connectives"
+    },
+    {
+      "find": "the rest is history",
+      "replace": "",
+      "family": "closers"
+    },
+    {
+      "find": "run don't walk",
+      "replace": "",
+      "family": "closers"
+    },
+    {
+      "find": "trust me on this one",
+      "replace": "",
+      "family": "closers"
+    },
+    {
+      "find": "don't sleep on this",
+      "replace": "",
+      "family": "closers"
+    },
+    {
+      "find": "follow for more",
+      "replace": "",
+      "family": "closers"
+    },
+    {
+      "find": "hit follow for more",
+      "replace": "",
+      "family": "closers"
+    },
+    {
+      "find": "double tap if",
+      "replace": "",
+      "family": "closers"
+    },
+    {
+      "find": "tag someone who needs this",
+      "replace": "",
+      "family": "closers"
+    },
+    {
+      "find": "let me know in the comments",
+      "replace": "",
+      "family": "closers"
+    },
+    {
+      "find": "share this with someone who needs it",
+      "replace": "",
+      "family": "closers"
+    },
+    {
+      "find": "the algorithm loves",
+      "replace": "Instagram pushes",
+      "family": "nouns"
+    },
+    {
+      "find": "beat the algorithm",
+      "replace": "get reach",
+      "family": "nouns"
+    },
+    {
+      "find": "go viral overnight",
+      "replace": "get reach",
+      "family": "nouns"
+    },
+    {
+      "find": "בעולם\\s+(?:של\\s+היום|ה[א-ת]+\\s+של\\s+היום|המודרני)",
+      "replace": "",
+      "family": "openers",
+      "lang": "he",
+      "regex": true,
+      "label": "בעולם של היום"
+    },
+    {
+      "find": "בעידן\\s+(?:הדיגיטלי|המודרני|של\\s+היום)",
+      "replace": "",
+      "family": "openers",
+      "lang": "he",
+      "regex": true,
+      "label": "בעידן הדיגיטלי"
+    },
+    {
+      "find": "בימינו",
+      "replace": "היום",
+      "family": "openers",
+      "lang": "he"
+    },
+    {
+      "find": "בואו\\s+נצלול(?:\\s+(?:לעומק|פנימה))?",
+      "replace": "",
+      "family": "openers",
+      "lang": "he",
+      "regex": true,
+      "label": "בואו נצלול"
+    },
+    {
+      "find": "(?:בסרטון|בפוסט|ברילס)\\s+(?:הזה|של\\s+היום)",
+      "replace": "",
+      "family": "openers",
+      "lang": "he",
+      "regex": true,
+      "label": "בסרטון של היום / בסרטון הזה"
+    },
+    {
+      "find": "(?:(?:זה|זו)\\s+)?לא\\s+סוד\\s*,?\\s*ש",
+      "replace": "",
+      "family": "openers",
+      "lang": "he",
+      "regex": true,
+      "label": "לא סוד ש",
+      "glued": true
+    },
+    {
+      "find": "כפי שכולנו יודעים",
+      "replace": "",
+      "family": "openers",
+      "lang": "he"
+    },
+    {
+      "find": "כפי שניתן לראות",
+      "replace": "",
+      "family": "openers",
+      "lang": "he"
+    },
+    {
+      "find": "חשוב\\s+(?:מאוד\\s+)?(?:לזכור|לציין|להדגיש|לדעת|להבין)\\s*,?\\s*ש",
+      "replace": "",
+      "family": "connectives",
+      "lang": "he",
+      "regex": true,
+      "label": "חשוב לזכור ש / לציין ש",
+      "glued": true
+    },
+    {
+      "find": "(?:ראוי|כדאי|מעניין|יש)\\s+(?:לציין|להדגיש|לזכור)\\s*,?\\s*ש",
+      "replace": "",
+      "family": "connectives",
+      "lang": "he",
+      "regex": true,
+      "label": "ראוי לציין ש",
+      "glued": true
+    },
+    {
+      "find": "אין\\s+ספק\\s*,?\\s*(?:ש|כי\\s+)",
+      "replace": "",
+      "family": "connectives",
+      "lang": "he",
+      "regex": true,
+      "label": "אין ספק ש",
+      "glued": true
+    },
+    {
+      "find": "ללא ספק",
+      "replace": "",
+      "family": "connectives",
+      "lang": "he"
+    },
+    {
+      "find": "יתרה מכך",
+      "replace": "",
+      "family": "connectives",
+      "lang": "he"
+    },
+    {
+      "find": "זאת ועוד",
+      "replace": "",
+      "family": "connectives",
+      "lang": "he"
+    },
+    {
+      "find": "מעבר\\s+לכך\\s*,",
+      "replace": "",
+      "family": "connectives",
+      "lang": "he",
+      "regex": true,
+      "label": "מעבר לכך,"
+    },
+    {
+      "find": "על מנת",
+      "replace": "כדי",
+      "family": "connectives",
+      "lang": "he"
+    },
+    {
+      "find": "במטרה ל",
+      "replace": "כדי ל",
+      "family": "connectives",
+      "lang": "he"
+    },
+    {
+      "find": "באמצעות",
+      "replace": "בעזרת",
+      "family": "connectives",
+      "lang": "he"
+    },
+    {
+      "find": "לאור\\s+(?:זאת|האמור)",
+      "replace": "לכן",
+      "family": "connectives",
+      "lang": "he",
+      "regex": true,
+      "label": "לאור זאת"
+    },
+    {
+      "find": "(?:כמו\\s+כן|בנוסף\\s+לכך|נוסף\\s+על\\s+כך)\\s*,?",
+      "replace": "גם",
+      "family": "connectives",
+      "lang": "he",
+      "regex": true,
+      "label": "כמו כן"
+    },
+    {
+      "find": "במילים אחרות",
+      "replace": "כלומר",
+      "family": "connectives",
+      "lang": "he"
+    },
+    {
+      "find": "(?:מה\\s+שחשוב\\s+להבין\\s+הוא|הנקודה\\s+החשובה\\s+היא)\\s*,?\\s*ש",
+      "replace": "",
+      "family": "connectives",
+      "lang": "he",
+      "regex": true,
+      "label": "מה שחשוב להבין הוא ש",
+      "glued": true
+    },
+    {
+      "find": "בסופו של יום",
+      "replace": "",
+      "family": "closers",
+      "lang": "he"
+    },
+    {
+      "find": "בסופו של דבר",
+      "replace": "בסוף",
+      "family": "closers",
+      "lang": "he"
+    },
+    {
+      "find": "השורה התחתונה היא ש",
+      "replace": "",
+      "family": "closers",
+      "lang": "he"
+    },
+    {
+      "find": "השורה התחתונה",
+      "replace": "בקיצור",
+      "family": "closers",
+      "lang": "he"
+    },
+    {
+      "find": "לסיכום(?:ו\\s+של\\s+דבר)?",
+      "replace": "",
+      "family": "closers",
+      "lang": "he",
+      "regex": true,
+      "label": "לסיכום"
+    },
+    {
+      "find": "כל\\s+מה\\s+ש(?:צריך|אתם\\s+צריכים|את\\s+צריכה|אתה\\s+צריך)\\s+לדעת\\s+על",
+      "replace": "",
+      "family": "closers",
+      "lang": "he",
+      "regex": true,
+      "label": "כל מה שצריך לדעת על"
+    },
+    {
+      "find": "זה הסימן שלכם",
+      "replace": "",
+      "family": "closers",
+      "lang": "he"
+    },
+    {
+      "find": "זה שינה לי את החיים",
+      "replace": "זה עבד לי",
+      "family": "closers",
+      "lang": "he"
+    },
+    {
+      "find": "זה ישנה לכם את החיים",
+      "replace": "זה יעזור לכם",
+      "family": "closers",
+      "lang": "he"
+    },
+    {
+      "find": "(?:עצרו|תעצרו)\\s+רגע",
+      "replace": "",
+      "family": "instagram",
+      "lang": "he",
+      "regex": true,
+      "label": "עצרו רגע"
+    },
+    {
+      "find": "אל\\s+(?:תגללו|תמשיכו\\s+לגלול)(?:\\s+הלאה)?|תפסיקו\\s+לגלול",
+      "replace": "",
+      "family": "instagram",
+      "lang": "he",
+      "regex": true,
+      "label": "אל תגללו"
+    },
+    {
+      "find": "(?:שמרו|תשמרו)\\s+(?:את\\s+(?:הפוסט|הסרטון)(?:\\s+הזה)?|לפעם\\s+הבאה)",
+      "replace": "",
+      "family": "instagram",
+      "lang": "he",
+      "regex": true,
+      "label": "שמרו את הפוסט"
+    },
+    {
+      "find": "תייגו\\s+(?:חבר|חברה|מישהו|מישהי|את\\s+מי)\\s+ש(?:צריך|צריכה|חייב|חייבת)(?:\\s+(?:לשמוע|לראות|לדעת))?(?:\\s+את\\s+זה)?",
+      "replace": "",
+      "family": "instagram",
+      "lang": "he",
+      "regex": true,
+      "label": "תייגו מישהו שצריך"
+    },
+    {
+      "find": "(?:שתפו|שלחו)\\s+(?:את\\s+זה\\s+)?(?:ל|עם\\s+)(?:מישהו|מישהי|מי)\\s+ש(?:צריך|צריכה)(?:\\s+(?:לשמוע|לראות))?\\s+את\\s+זה",
+      "replace": "",
+      "family": "instagram",
+      "lang": "he",
+      "regex": true,
+      "label": "שתפו עם מי שצריך"
+    },
+    {
+      "find": "עקבו\\s+(?:אחריי\\s+|אחרינו\\s+)?(?:לעוד(?:\\s+(?:תוכן|טיפים|כאלה))?|לתוכן\\s+נוסף)",
+      "replace": "",
+      "family": "instagram",
+      "lang": "he",
+      "regex": true,
+      "label": "עקבו לעוד"
+    },
+    {
+      "find": "(?:תנו\\s+|עשו\\s+)?לייק\\s+אם\\s+[^.!?\\n]{0,40}",
+      "replace": "",
+      "family": "instagram",
+      "lang": "he",
+      "regex": true,
+      "label": "לייק אם"
+    },
+    {
+      "find": "ספרו לי בתגובות",
+      "replace": "",
+      "family": "instagram",
+      "lang": "he"
+    },
+    {
+      "find": "האלגוריתם אוהב",
+      "replace": "אינסטגרם מקדם",
+      "family": "instagram",
+      "lang": "he"
+    },
+    {
+      "find": "לנצח את האלגוריתם",
+      "replace": "להגיע ליותר אנשים",
+      "family": "instagram",
+      "lang": "he"
+    },
+    {
+      "find": "להתפוצץ ויראלית",
+      "replace": "להגיע ליותר אנשים",
+      "family": "instagram",
+      "lang": "he"
+    },
+    {
+      "find": "(?:תצפו|צפו|תישארו)\\s+עד\\s+הסוף",
+      "replace": "",
+      "family": "instagram",
+      "lang": "he",
+      "regex": true,
+      "label": "תצפו עד הסוף"
+    },
+    {
+      "find": "(?:(?:אתם|אתה|את)\\s+)?לא\\s+תאמינו(?:\\s+(?:מה|כמה|איך))?",
+      "replace": "",
+      "family": "instagram",
+      "lang": "he",
+      "regex": true,
+      "label": "לא תאמינו"
+    },
+    {
+      "find": "אף אחד לא מדבר על זה",
+      "replace": "מעטים יודעים את זה",
+      "family": "instagram",
+      "lang": "he"
+    },
+    {
+      "find": "בואו נדבר על זה",
+      "replace": "",
+      "family": "instagram",
+      "lang": "he"
+    }
+  ],
+  "structures": [
+    {
+      "id": "not-just",
+      "regex": "(?i)\\bit'?s not (?:just|only) [^.!?\\n]{2,60}[,.] it'?s\\b",
+      "name": "\"It's not just X, it's Y\"",
+      "fix": "Say the one thing you actually mean. Delete the setup half."
+    },
+    {
+      "id": "not-only",
+      "regex": "(?i)\\bnot only\\b[^.!?\\n]{2,80}\\bbut also\\b",
+      "name": "\"Not only X but also Y\"",
+      "fix": "Split into two sentences, or drop the weaker half."
+    },
+    {
+      "id": "isnt-about",
+      "regex": "(?i)\\b(?:this|it) is(?:n'?t| not) about [^.!?\\n]{2,60}[.!] it'?s about\\b",
+      "name": "\"It isn't about X. It's about Y.\"",
+      "fix": "Lead with Y. The reversal is the tell."
+    },
+    {
+      "id": "the-result",
+      "regex": "(?i)^\\s*(?:the result|the best part|the kicker|the catch)\\?\\s*$",
+      "name": "One-word rhetorical question line",
+      "fix": "Answer it inline instead of staging a reveal."
+    },
+    {
+      "id": "heres-what",
+      "regex": "(?i)\\bhere'?s what (?:i|we) learned\\b",
+      "name": "\"Here's what I learned\"",
+      "fix": "State the lesson. Skip the announcement."
+    },
+    {
+      "id": "triad",
+      "regex": "(?i)\\b\\w+, \\w+, and \\w+\\.",
+      "name": "Rule-of-three triad",
+      "fix": "Two items or four. Three is the model's default rhythm."
+    },
+    {
+      "id": "rocket",
+      "regex": "[\\U0001F680\\U0001F525\\U0001F4A1\\u2728\\U0001F3AF]",
+      "name": "Rocket / fire / bulb / sparkle / dart emoji",
+      "fix": "One emoji max, and not one of these five."
+    },
+    {
+      "id": "hashtag-wall",
+      "regex": "(?:#\\w+[ \\t]*){6,}",
+      "name": "Hashtag wall (6+)",
+      "fix": "Instagram caps posts at five hashtags since 18 Dec 2025. Keep up to five specific ones as topic labels."
+    },
+    {
+      "id": "as-an-ai",
+      "regex": "(?i)\\bas an ai\\b|\\bas a language model\\b",
+      "name": "Model self-reference",
+      "fix": "Delete the sentence."
+    },
+    {
+      "id": "in-summary",
+      "regex": "(?i)^\\s*(?:in summary|to summarize|in conclusion)\\b",
+      "name": "Essay-closer opener",
+      "fix": "A post does not need a conclusion paragraph."
+    },
+    {
+      "id": "engagement-bait",
+      "regex": "(?i)\\b(?:agree\\?|thoughts\\?|who else\\b|am i wrong\\?)\\s*$",
+      "name": "Reflex engagement bait",
+      "fix": "Ask a question only you could ask, about the specific thing above it."
+    },
+    {
+      "id": "stop-scroll",
+      "regex": "(?im)^\\s*(?:stop scrolling|don'?t scroll|wait[,.]? don'?t scroll)\\b",
+      "name": "\"Stop scrolling\" opener",
+      "fix": "The scroll-stop has to be the claim itself. Asking for attention is the tell that you have not earned it."
+    },
+    {
+      "id": "in-this-video",
+      "regex": "(?i)\\b(?:in (?:this|today'?s) (?:video|reel|post)|today i'?m going to show you|i'?m going to (?:show|teach) you how)\\b",
+      "name": "Video preamble (\"in this video I'm going to show you\")",
+      "fix": "Delete it and start at the payoff. The first two seconds decide the whole reel."
+    },
+    {
+      "id": "emoji-bullets",
+      "regex": "(?m)^\\s*[\\U0001F300-\\U0001FAFF✅➡⬅✔✨]\\s*\\S",
+      "name": "Emoji bullet list",
+      "fix": "Use a hyphen or a line break. Emoji bullets are the single most template-looking thing in a caption."
+    },
+    {
+      "id": "caps-shout",
+      "regex": "\\b[A-Z]{3,}\\b(?:\\s+\\b[A-Z]{3,}\\b){2,}",
+      "name": "Three or more shouted words in a row",
+      "fix": "Caps are a volume knob, not a highlighter. One word, at most."
+    },
+    {
+      "id": "follow-bait",
+      "regex": "(?i)\\b(?:follow for more|tag someone who|double tap if|share this if|comment below if)\\b",
+      "name": "Reflex follow or tag bait",
+      "fix": "Ask for the one action this post actually earns. The generic ask trains the audience to ignore every ask."
+    },
+    {
+      "id": "he-not-just",
+      "regex": "(?:^|[\\s.!?])(?:זה|זו|זאת|הוא|היא|הם|הן)\\s+לא\\s+(?:רק\\s+)?[^.!?\\n]{2,60}?(?:[,.]|\\s-)\\s*(?:זה|זו|זאת|הוא|היא|הם|הן)\\s+(?!לא(?![\\w]))[^\\s.,]",
+      "name": "\"זה לא (רק) X, זה Y\"",
+      "fix": "תגידו את הדבר האחד שאתם מתכוונים אליו. מחקו את חצי ההקדמה.",
+      "lang": "he"
+    },
+    {
+      "id": "he-not-only",
+      "regex": "(?:^|[\\s.!?])לא\\s+רק\\s+[^.!?\\n]{2,80}\\s+אלא\\s+(?:גם|ש)",
+      "name": "\"לא רק X אלא גם Y\"",
+      "fix": "פצלו לשני משפטים, או מחקו את החצי החלש.",
+      "lang": "he"
+    },
+    {
+      "id": "he-isnt-about",
+      "regex": "(?:זה|זו|זאת|הוא|היא|הם|הן)\\s+לא\\s+(?:על|עניין\\s+של)\\s+[^.!?\\n]{2,60}?(?:[,.]|\\s-)\\s*(?:זה|זו|זאת|הוא|היא|הם|הן)\\s+(?:על|עניין\\s+של)",
+      "name": "\"זה לא על X, זה על Y\"",
+      "fix": "פתחו ב-Y. ההיפוך הוא הסימן.",
+      "lang": "he"
+    },
+    {
+      "id": "he-the-result",
+      "regex": "(?m)^\\s*(?:ו)?(?:התוצאה|הסוד|למה|ההבדל|הבעיה|הטריק|המלכוד|הפואנטה|המסקנה|החלק\\s+הכי\\s+טוב|השורה\\s+התחתונה)\\?\\s*$",
+      "name": "שורת שאלה רטורית של מילה אחת (התוצאה? הסוד?)",
+      "fix": "ענו בתוך המשפט במקום לביים חשיפה.",
+      "lang": "he"
+    },
+    {
+      "id": "he-heres-the-thing",
+      "regex": "(?:^|[\\s.!?])(?:ו)?הנה\\s+(?:העניין|הדבר|הקטע|הסיפור|האמת)\\s*:",
+      "name": "\"והנה העניין:\" / \"הנה הדבר:\"",
+      "fix": "תגידו את הדבר. בלי ההכרזה.",
+      "lang": "he"
+    },
+    {
+      "id": "he-imagine",
+      "regex": "(?:^|[\\s.!?])(?:ו)?(?:תדמיינו|דמיינו|תדמיין|תדמייני)\\s+(?:ש|לכם|רגע|את)",
+      "name": "\"תדמיינו ש...\"",
+      "fix": "תנו את המקרה עצמו (כתרחיש להמחשה), לא הזמנה לדמיין.",
+      "lang": "he"
+    },
+    {
+      "id": "he-triad",
+      "regex": "(?<![\\w])[א-ת]{2,},\\s+[א-ת]{2,}\\s+ו[א-ת]{2,}[.!]",
+      "name": "שלישייה (X, Y ו-Z.)",
+      "fix": "שניים או ארבעה. שלוש זה הקצב שמודלים נופלים אליו.",
+      "lang": "he"
+    },
+    {
+      "id": "he-preamble",
+      "regex": "(?:בואו\\s+נדבר\\s+על|היום\\s+(?:נדבר|אדבר|אני\\s+רוצה\\s+לדבר)\\s+על|בסרטון\\s+(?:הזה|של\\s+היום))",
+      "name": "הקדמת וידאו (בסרטון הזה / היום נדבר על)",
+      "fix": "מחקו ופתחו בתמורה. שתי השניות הראשונות קובעות.",
+      "lang": "he"
+    },
+    {
+      "id": "he-stop-scroll",
+      "regex": "(?m)^\\s*(?:עצרו|תעצרו|אל\\s+תגללו|תפסיקו\\s+לגלול)(?![\\w])",
+      "name": "פתיחת \"עצרו / אל תגללו\"",
+      "fix": "העצירה צריכה להיות הטענה עצמה. בקשת תשומת לב היא הסימן שעוד לא הרווחתם אותה.",
+      "lang": "he"
+    },
+    {
+      "id": "he-follow-bait",
+      "regex": "(?:עקבו\\s+לעוד|תייגו\\s+(?:חבר|חברה|מישהו|מישהי)|לייק\\s+אם|שתפו\\s+אם)",
+      "name": "פיתיון עוקבים או תיוג",
+      "fix": "בקשו את הפעולה האחת שהפוסט הזה באמת מרוויח.",
+      "lang": "he"
+    },
+    {
+      "id": "he-engagement-bait",
+      "regex": "(?:מסכימים\\?|מה\\s+דעתכם\\?|אני\\s+טועה\\?|מי\\s+עוד\\s+מזדהה\\?)\\s*$",
+      "name": "פיתיון תגובות רפלקסיבי",
+      "fix": "שאלו שאלה שרק אתם יכולים לשאול, על הדבר הספציפי שמעליה.",
+      "lang": "he"
+    }
+  ],
+  "invisible_note": "action keep: left in place and reported. LRM/RLM fix the order of mixed Hebrew/English text and phones insert them; humanize.py --strip-bidi removes them too.",
+  "flagged": [
+    {
+      "find": "מסע",
+      "note": "מטפורה שחוקה ('המסע שלכם'). השאירו רק אם יש מסע אמיתי.",
+      "lang": "he"
+    },
+    {
+      "find": "חוויה",
+      "note": "לעתים קרובות מילה ריקה. מה בדיוק קרה?",
+      "lang": "he"
+    },
+    {
+      "find": "קסם",
+      "note": "'הקסם קורה כש...' הוא קלישאה. אמרו מה קורה.",
+      "lang": "he"
+    },
+    {
+      "find": "העצמה",
+      "note": "תקין בהקשר חברתי, ריק בשיווק.",
+      "lang": "he"
+    },
+    {
+      "find": "קריטי",
+      "note": "בסדר בדיבור, אבל מתנפח מהר. אולי 'חשוב'.",
+      "lang": "he"
+    },
+    {
+      "find": "לנווט",
+      "note": "'לנווט בהליך' נשמע מתורגם. אולי 'לעבור את ההליך'.",
+      "lang": "he"
+    },
+    {
+      "find": "טרנספורמציה",
+      "note": "מה השתנה, בפועל?",
+      "lang": "he"
+    },
+    {
+      "find": "השראה",
+      "note": "תנו את הדבר עצמו במקום להבטיח השראה.",
+      "lang": "he"
+    },
+    {
+      "find": "אותנטי",
+      "note": "מי שאותנטי לא אומר את זה.",
+      "lang": "he"
+    },
+    {
+      "find": "אותנטית",
+      "note": "מי שאותנטית לא אומרת את זה.",
+      "lang": "he"
+    },
+    {
+      "find": "מרגש",
+      "note": "תנו לקורא להחליט מה מרגש.",
+      "lang": "he"
+    },
+    {
+      "find": "ייחודי",
+      "note": "במה בדיוק? אם אין תשובה, מוחקים.",
+      "lang": "he"
+    }
+  ]
+}

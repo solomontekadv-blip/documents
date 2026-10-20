@@ -1,0 +1,16 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "instagram-agent-he",
+  "description": "Hebrew lawyer-compliant Instagram skills",
+  "owner": {
+    "name": "Soli Teka"
+  },
+  "plugins": [
+    {
+      "name": "instagram-agent-he",
+      "description": "13 סקילים לניהול חשבון אינסטגרם של עורך דין בעברית: רילס, כיתובים, קרוסלות, סטוריז, תגובות, DM, תכנון, ציון פרופיל וביקורת, עם שכבת ציות לכללי הפרסומת של לשכת עורכי הדין.",
+      "source": "./",
+      "category": "productivity"
+    }
+  ]
+}
