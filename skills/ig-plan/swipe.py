@@ -64,6 +64,7 @@ HEADER_ALIASES = {
     "חציון": "median", "ממוצע": "median", "בסיס": "median",
     "צפיות": "views", "תצוגות": "views",
     "הוק": "hook", "פתיח": "hook", "משפט פתיחה": "hook", "שורה ראשונה": "hook",
+    "ציות": "flag", "דגל": "flag", "סימון": "flag",
 }
 
 
@@ -139,8 +140,9 @@ def analyse(rows, formulas, formulas_he=None):
         base = r.get("median") or r.get("followers") or 0
         r["baseline"] = base
         r["outlier"] = round(r["views"] / base, 2) if base else None
+        r["flag"] = (r.get("flag") or "").strip()
         if is_hebrew(r["hook"]):
-            r["formula_id"], r["formula"] = classify(r["hook"], formulas_he)
+            r["formula_id"], r["formula"] = classify(he.analysis_text(r["hook"]), formulas_he)
             r["words"] = len(he.tokens(r["hook"]))
         else:
             r["formula_id"], r["formula"] = classify(r["hook"], formulas)
@@ -160,6 +162,8 @@ def analyse(rows, formulas, formulas_he=None):
 
     counts = {}
     for r in top:
+        if r["flag"]:                    # works for them, not allowed here
+            continue
         counts[r["formula"]] = counts.get(r["formula"], 0) + 1
     return {
         "baseline": "account median" if used_median else "follower count",
@@ -172,6 +176,7 @@ def analyse(rows, formulas, formulas_he=None):
         "top_words": med(top, "words"),
         "bottom_words": med(bottom, "words"),
         "unclassified": sum(1 for r in ranked if r["formula"] == "unclassified"),
+        "flagged": sum(1 for r in ranked if r["flag"]),
     }
 
 
@@ -185,7 +190,8 @@ def render(a, out=sys.stdout):
         score = f"{r['hook_score']:.0f}" if r["hook_score"] is not None else " -"
         fid = f"#{r['formula_id']:<2}" if r["formula_id"] else "-  "
         print(f"  {mult:>7}  hook {score:>3}  {fid} {r['formula'][:22]:<22} "
-              f"{r.get('account', '')[:16]:<16} {r['views']:>9,}", file=out)
+              f"{r.get('account', '')[:16]:<16} {r['views']:>9,}"
+              + (f"  FLAG {r['flag']}" if r["flag"] else ""), file=out)
         print(f"           \"{r['hook'][:96]}\"", file=out)
     print("-" * max(len(head), 78), file=out)
     print("WHAT IS WORKING IN THIS BATCH", file=out)
@@ -199,6 +205,10 @@ def render(a, out=sys.stdout):
           f"vs bottom {a['bottom_words']} words", file=out)
     print(f"  unclassified:          {a['unclassified']} of {a['n']}. Read those by hand, "
           "they are where a formula you do not have yet is hiding.", file=out)
+    if a["flagged"]:
+        print(f"  compliance flags:      {a['flagged']} of {a['n']} (FLAG). Left out of the "
+              "formula count above:\n                         they work in the niche, they "
+              "are not yours to copy.", file=out)
     print("\n  A hand-collected batch is evidence, not proof. Twelve reels shows you "
           "nothing;\n  forty across six accounts shows you something. Collect more before "
           "you believe it.\n", file=out)
@@ -208,12 +218,20 @@ def to_markdown(a):
     lines = ["# Swipe file", "",
              f"{a['n']} reels across {a['accounts']} accounts. "
              f"Ranked by multiple over {a['baseline']}.", ""]
+    if a.get("flagged"):
+        lines += [f"**{a['flagged']} reels carry a compliance flag.** They are data on "
+                  "what works in the niche, not a model: do not copy their format.", ""]
     for r in a["reels"]:
         mult = f"{r['outlier']:.1f}x" if r["outlier"] else "?"
-        lines += [f"## {mult}  {r['formula']}  ({r.get('account', '')})",
+        lines += [f"## {mult}  {r['formula']}  ({r.get('account', '')})"
+                  + (f"  [FLAG {r['flag']}]" if r["flag"] else ""),
                   f"- views: {r['views']:,}  baseline: {r['baseline']:,}",
                   f"- hook score: {r['hook_score']}  words: {r['words']}",
-                  f"- hook: \"{r['hook']}\"", ""]
+                  f"- hook: \"{r['hook']}\""]
+        if r["flag"]:
+            lines.append(f"- compliance: {r['flag']}. The format is not allowed here; "
+                         "only the hook may be borrowed, and only if it passes ethics.py.")
+        lines.append("")
     return "\n".join(lines) + "\n"
 
 

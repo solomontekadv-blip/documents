@@ -314,6 +314,8 @@ CHECKS = ["BURSTINESS", "SPECIFICITY", "SLOP DENSITY", "FINGERPRINT", "VOICE"]
 def run(text, lex):
     results = {}
     if he.is_hebrew(text):               # majority script decides
+        # Niqqud is read past; invisible characters stay for FINGERPRINT.
+        text = he.strip_niqqud(text)
         results["BURSTINESS"] = check_burstiness_he(text)
         results["SPECIFICITY"] = check_specificity_he(text)
         results["SLOP DENSITY"] = check_slop_he(text, lex)

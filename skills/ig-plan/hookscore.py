@@ -235,6 +235,7 @@ STAKES_HE = {
     "לא", "אל", "אין", "אף", "אסור", "בלי", "ללא", "רק", "עדיין", "כבר",
     "במקום", "אבל", "אלא", "חוץ", "לפני", "עד", "מאוחר", "מוקדם", "אחרון",
     "טעות", "טעויות", "טועים", "טועה", "שגיאה", "פספוס", "פספסתם", "פספסתי",
+    "טעיתי", "טעיתם", "טעינו", "טעו", "פספסנו", "הפסדנו", "איבדנו", "שילמנו",
     "מחיר", "עלות", "עלה", "עלתה", "עלו", "שילמתי", "שילמתם", "לשלם", "תשלום",
     "הפסד", "הפסדתי", "להפסיד", "מפסידים", "איבדתי", "לאבד", "מאבדים", "איבוד",
     "סיכון", "סכנה", "מסוכן", "אזהרה", "זהירות", "להיזהר", "חרטה", "להתחרט",
@@ -409,6 +410,7 @@ def load_formulas_he(path=HOOKS):
 
 
 def classify_he(text, formulas=None):
+    text = he.analysis_text(text)
     for fid, name, pattern in (formulas if formulas is not None else load_formulas_he()):
         if pattern.search(text):
             return fid, name
@@ -438,7 +440,8 @@ def run_he(text):
 
 def run(text):
     if he.is_hebrew(text):               # majority script decides
-        return run_he(text)
+        # Niqqud splits words into letters for the tokenizer; read without it.
+        return run_he(he.analysis_text(text))
     results = {
         "LENGTH": check_length(text),
         "SPECIFICITY": check_specificity(text),

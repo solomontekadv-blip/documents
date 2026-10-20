@@ -1,6 +1,6 @@
 ---
 name: ig-profile
-description: ציון לפרופיל מתוך 100 ושכתוב של מה שמוריד הכי הרבה נקודות - שם, ביו, קישור, היילייטס, נעוצים. "תשפר לי את הביו", "תבדוק את הפרופיל". fix my bio, score my profile
+description: "ציון לפרופיל מתוך 100 ושכתוב של מה שמוריד הכי הרבה נקודות - שם, ביו, קישור, היילייטס, נעוצים. \"תשפר לי את הביו\", \"תבדוק את הפרופיל\", \"למה לא עוקבים אחריי\". fix my bio, score my profile, optimize my profile, why don't people follow me"
 ---
 
 # ig-profile

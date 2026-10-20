@@ -1,6 +1,6 @@
 ---
 name: ig-story
-description: רצף סטוריז יומי לפי כללי האתיקה - פריים אחר פריים, איזו מדבקה איפה, חידון על מיתוסים משפטיים. "מה לשים בסטורי", "רעיון לסקר", "stories", "story sequence", "poll idea".
+description: "רצף סטוריז יומי לפי כללי האתיקה - פריים אחר פריים, איזו מדבקה איפה, חידון על מיתוסים משפטיים. \"מה לשים בסטורי\", \"אין לי מה להעלות לסטורי\", \"רעיון לסקר\". stories, story sequence, poll idea, I have nothing to story about"
 ---
 
 # ig-story

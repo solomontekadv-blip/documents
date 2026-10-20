@@ -115,6 +115,10 @@ def split_beats(raw, wps):
 def analyse(raw, wpm=None, target=None):
     global HEBREW
     HEBREW = he.is_hebrew(raw)
+    if HEBREW:
+        # Niqqud and invisible characters would split words into letters and
+        # inflate the timing (a 4s line timed at 15s). Time the bare words.
+        raw = he.analysis_text(raw)
     wpm_estimated = wpm is None and HEBREW
     if wpm is None:
         wpm = DEFAULT_WPM_HE if HEBREW else DEFAULT_WPM

@@ -42,10 +42,14 @@ import os
 import re
 import sys
 
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))  # run from any folder, even with python3 -I
+import hebtext as he                                             # noqa: E402
+
 HERE = os.path.dirname(os.path.abspath(__file__))
 RULES = os.path.join(HERE, "ethics.json")
 CONTEXTS = ["general", "caption", "script", "story", "comment", "reply", "dm", "bio", "carousel"]
 MACRO_RE = re.compile(r"<<([A-Z_]+)>>")
+LOCAL_DOMAINS = "~/.claude/instagram/allowed_domains.txt"
 
 
 def load_rules(path=RULES):
@@ -76,6 +80,12 @@ def load_rules(path=RULES):
             c["_alt"] = dict(r["alt_message"], _p=re.compile(expand(r["alt_message"]["when"])))
         rules.append(c)
     allowed = [d.lower() for d in data.get("allowed_domains", []) if not d.startswith("{{")]
+    # The user's own domains live outside the plugin, so a reinstall keeps them:
+    # one domain per line, "#" for comments.
+    local = os.path.expanduser(LOCAL_DOMAINS)
+    if os.path.exists(local):
+        with open(local, encoding="utf-8") as fh:
+            allowed += [l.split("#")[0].strip().lower() for l in fh if l.split("#")[0].strip()]
     return rules, allowed
 
 
@@ -129,6 +139,11 @@ def run(text, context="general", sponsored=False, rules_path=RULES):
     caption.py imports this. Findings are sorted by line, then code.
     """
     rules, allowed = load_rules(rules_path)
+    # Niqqud and invisible characters hide a word from every rule: "מוּמְחֶה"
+    # and "מו<ZWSP>מחה" must still be "מומחה". Rules read the cleaned text;
+    # line breaks are untouched, so line numbers still match the draft.
+    niqqud, invisible = he.hidden_marks(text)
+    text = he.analysis_text(text)
     # Hashtags: "#עורך_דין_מומחה" must be read as words. "_" -> " " keeps every
     # offset and line number, so findings still point at the original text.
     text = re.sub(r"#\w+", lambda m: m.group(0).replace("_", " "), text)
@@ -223,6 +238,7 @@ def run(text, context="general", sponsored=False, rules_path=RULES):
     return {
         "context": context,
         "sponsored": sponsored,
+        "cleaned": {"niqqud": niqqud, "invisible": invisible},
         "findings": findings,
         "fail": sum(1 for f in findings if f["level"] == "FAIL"),
         "review": sum(1 for f in findings if f["level"] == "REVIEW"),
@@ -259,6 +275,10 @@ def render(result, out=sys.stdout):
     head = f"ETHICS LINT  ·  context: {result['context']}" + ("  ·  sponsored" if result["sponsored"] else "")
     print("\n" + head, file=out)
     print("=" * max(len(head), 62), file=out)
+    cl = result.get("cleaned", {})
+    if cl.get("niqqud") or cl.get("invisible"):
+        print(f"  נבדק בלי {cl['niqqud']} סימני ניקוד ו-{cl['invisible']} תווים נסתרים"
+              " (הטיוטה עצמה לא שונתה).", file=out)
     if not result["findings"]:
         print("  Nothing detectable. The lawyer still reads it before it goes out (C18).", file=out)
     for f in result["findings"]:

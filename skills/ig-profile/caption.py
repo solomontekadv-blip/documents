@@ -26,6 +26,7 @@ Usage
   python3 caption.py caption.txt
   python3 caption.py caption.txt --keywords "proposal software,client contract"
   pbpaste | python3 caption.py -
+  python3 caption.py caption.txt --sponsored
   python3 caption.py caption.txt --json
 """
 
@@ -84,7 +85,7 @@ ASKS_HE = [
     (re.compile(_P + r"(?:שלחו|תשלחו|שלחי|תשלחי|כתבו|תכתבו|פנו|תפנו)\s+(?:לי\s+|לנו\s+|אליי\s+|אלינו\s+)?(?:הודעה|הודעת|DM|דיאם|בפרטי|בדיאם|בוואטסאפ|בווטסאפ)"),
      "DM me"),
     (re.compile(_P + r"(?:שמרו|תשמרו|שמרי|תשמרי|שמור|תשמור)(?![\w])"), "save this"),
-    (re.compile(_P + r"(?:שתפו|תשתפו|שתפי|תשתפי|שלחו|תשלחו)\s+(?:את\s+)?(?:זה|הפוסט|הסרטון|לחבר|לחברה|למי|עם|ל)"),
+    (re.compile(_P + r"(?:שתפו|תשתפו|שתפי|תשתפי|שלחו|תשלחו)\s+(?:את\s+)?(?:זה|הפוסט|הסרטון|לחבר|לחברה|למי|עם|ל(?!(?:י|נו)(?![\w])))"),
      "share this"),
     (re.compile(_P + r"(?:עקבו|תעקבו|עקבי|תעקבי)(?![\w])"), "follow"),
     (re.compile(r"(?:ה)?(?:קישור|לינק)\s+(?:\S+\s+)?(?:בביו|בפרופיל)|(?:לחצו|תלחצו|הקליקו|היכנסו)\s+(?:על|ל|ב)"),
@@ -123,6 +124,7 @@ def render_box(window, truncated, out=sys.stdout, width=52):
 def keyword_found(keyword, text):
     """Hebrew keyword phrases match with or without a prefix on each word
     ("עורך דין גירושין" is found in "לעורך דין גירושין"). Latin stays a substring."""
+    text = he.analysis_text(text)
     if not he.HEB_LETTER.search(keyword):
         return keyword.lower() in text.lower()
     parts = [re.escape(p) for p in keyword.split()]
@@ -130,7 +132,7 @@ def keyword_found(keyword, text):
     return re.search(rx, text, re.IGNORECASE) is not None
 
 
-def analyse(text, cut=TRUNCATE, keywords=None, run_ethics=True):
+def analyse(text, cut=TRUNCATE, keywords=None, run_ethics=True, sponsored=False):
     text = text.rstrip()
     stripped = text.strip()
     hebrew = he.is_hebrew(stripped)
@@ -149,7 +151,17 @@ def analyse(text, cut=TRUNCATE, keywords=None, run_ethics=True):
     truncated = chars > cut
     asks = [name for pattern, name in ASKS if pattern.search(stripped)]
     if he.HEB_LETTER.search(stripped):
-        asks += [name for pattern, name in ASKS_HE if pattern.search(stripped) and name not in asks]
+        # One phrase is one ask: "שלחו לי הודעה" is a DM request, not also a
+        # share. A span already claimed by an earlier ask is not counted again.
+        clean = he.analysis_text(stripped)
+        taken = []
+        for pattern, name in ASKS_HE:
+            for m in pattern.finditer(clean):
+                if any(m.start() < b and a < m.end() for a, b in taken):
+                    continue
+                taken.append(m.span())
+                if name not in asks:
+                    asks.append(name)
     filler = [t for t in tags if t.lower() in FILLER_TAGS]
     keywords = [k.strip() for k in (keywords or []) if k.strip()]
 
@@ -176,7 +188,7 @@ def analyse(text, cut=TRUNCATE, keywords=None, run_ethics=True):
 
     if hebrew:
         # No capitals in Hebrew: numbers, number words, money, legal nouns, quotes.
-        marks = he.concrete_markers(window)
+        marks = he.concrete_markers(he.analysis_text(window))
         add("HOOK IS CONCRETE", "PASS" if marks else "WARN",
             f"{len(marks)} number(s), legal term(s) or quote(s) in the visible window"
             + ("" if marks else " - nothing checkable before the tap"))
@@ -240,7 +252,7 @@ def analyse(text, cut=TRUNCATE, keywords=None, run_ethics=True):
     # a REVIEW means the lawyer has to look before it is READY.
     eth = None
     if run_ethics and ethics is not None:
-        r = ethics.run(stripped, context="caption")
+        r = ethics.run(stripped, context="caption", sponsored=sponsored)
         eth = {"fail": r["fail"], "review": r["review"],
                "fail_codes": ethics.codes(r, "FAIL"), "review_codes": ethics.codes(r, "REVIEW"),
                "summary": ethics.summary_line(r)}
@@ -288,11 +300,13 @@ def main():
     ap.add_argument("--truncate", type=int, default=TRUNCATE,
                     help=f"characters shown before '... more' (default {TRUNCATE})")
     ap.add_argument("--keywords", default="", help="comma-separated terms you want to be found for")
+    ap.add_argument("--sponsored", action="store_true",
+                    help="paid or sponsored post: the ethics gate then requires the word פרסומת")
     ap.add_argument("--json", action="store_true")
     args = ap.parse_args()
 
     raw = sys.stdin.read() if args.input == "-" else open(args.input, encoding="utf-8").read()
-    a = analyse(raw, cut=args.truncate, keywords=args.keywords.split(","))
+    a = analyse(raw, cut=args.truncate, keywords=args.keywords.split(","), sponsored=args.sponsored)
     if args.json:
         print(json.dumps(a, indent=2, ensure_ascii=False))
     else:

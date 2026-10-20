@@ -126,6 +126,10 @@ def pass_invisible(text, lex, strip_bidi=False):
     LRM / RLM are kept and reported in `kept`, unless strip_bidi is set.
     """
     hits, kept = [], []
+    # LRM / RLM hold mixed Hebrew-English lines in order. In a text with no
+    # Hebrew they do nothing, and detect.py counts them as a fingerprint, so
+    # they go, as in the original.
+    strip_bidi = strip_bidi or not he.HEB_LETTER.search(text)
     for entry in lex["invisible"]:
         cp = _cp(entry["cp"])
         if isinstance(cp, tuple):
@@ -145,7 +149,7 @@ def pass_invisible(text, lex, strip_bidi=False):
         text = re.sub(pattern, "" if action == "delete" else " ", text)
     # Any remaining Cf (format) character is invisible by definition, except
     # the bidi marks we chose to keep.
-    keep = "" if strip_bidi else BIDI_MARKS
+    keep = "" if strip_bidi else BIDI_MARKS                           # strip_bidi as set above
     stray = [c for c in text if unicodedata.category(c) == "Cf" and c not in keep]
     if stray:
         hits.append({"name": "other invisible format chars", "count": len(stray),
@@ -279,7 +283,6 @@ def pass_lexical_he(text, lex):
     text = re.sub(r",\s*([,.;:!?])", r"\1", text)
     text = re.sub(r"([.!?])[ \t]*[:;]", r"\1", text)                  # "!:" after an emptied clause
     text = re.sub(r"\.[!?]+", ".", text)                              # ".!" left by a deleted CTA
-    text = re.sub(r"(?<![\w])([ושה])[ \t]+(?=[\u05d0-\u05ea])", r"\1", text)  # dangling ש / ו
     text = re.sub(r"(?m)^[ \t]+(?=\S)", "", text)
     text = re.sub(r"(?m)[ \t]+$", "", text)
     text = re.sub(r"(?m)^[ \t]*-[ \t]*$\n?", "", text)                  # a hyphen left alone

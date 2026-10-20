@@ -16,9 +16,11 @@ lookups ("is ובהסכם the word הסכם?") and is never used to change what 
   concrete_markers(text)  numbers, number words, money, legal nouns, quoted terms
   person_counts(text)     first / second person markers, for ADDRESS and VOICE
   lex_regex(entry)        prefix-aware regex for a Hebrew slop.json entry
+  analysis_text(text)     niqqud and invisible characters removed, for checks only
 """
 
 import re
+import unicodedata
 
 HEB = "א-ת"                     # alef to tav, final forms included
 HEB_LETTER = re.compile("[" + HEB + "]")
@@ -49,6 +51,43 @@ def is_hebrew(text):
 
 def lang(text):
     return "he" if is_hebrew(text) else "en"
+
+
+# ---------------------------------------------------------------- marks
+
+# Niqqud and cantillation: every combining mark in U+0591-U+05C7. The
+# punctuation that shares the block stays: maqaf U+05BE, paseq U+05C0, sof
+# pasuq U+05C3, nun hafukha U+05C6. Without this, "מוּמְחֶה" is not the word
+# "מומחה" to any lexicon or rule, and the tokenizer splits it into letters.
+NIQQUD = "֑-ׇֽֿׁׂׅׄ"
+NIQQUD_RE = re.compile("[" + NIQQUD + "]")
+NQ = "[" + NIQQUD + "]*"            # optional niqqud after a letter, in patterns
+
+
+def strip_niqqud(text):
+    return NIQQUD_RE.sub("", text)
+
+
+def strip_invisible(text):
+    """Drop format characters (category Cf): zero-width space and joiners,
+    soft hyphen, word joiner, BOM, bidi marks and embeddings. A zero-width
+    space inside "מו​מחה" hides the word from every pattern."""
+    return "".join(c for c in text if unicodedata.category(c) != "Cf")
+
+
+def analysis_text(text):
+    """The text the checks read: no niqqud, no invisible characters.
+
+    Never shown to the user as a rewrite. Line breaks are untouched, so line
+    numbers in a report still point at the original text.
+    """
+    return strip_invisible(strip_niqqud(text))
+
+
+def hidden_marks(text):
+    """(niqqud marks, invisible characters) in `text`, for a report note."""
+    return (len(NIQQUD_RE.findall(text)),
+            sum(1 for c in text if unicodedata.category(c) == "Cf"))
 
 
 # ---------------------------------------------------------------- tokens
@@ -165,6 +204,7 @@ LEGAL_WORDS = {
     "ירושה", "ירושות", "צוואה", "צוואות", "גט", "כתובה",
     "הסכם", "הסכמים", "הסכמי", "תביעה", "תביעות", "ערעור", "גישור", "בוררות",
     "אפוטרופסות", "אפוטרופוס", "תסקיר", 'עו"ד', 'בימ"ש', 'ביהמ"ש',
+    "גירושין", "גירושים", "נישואין", "אימוץ", "אבהות", "פונדקאות",
     'הוצל"פ', 'תמ"ש', 'פס"ד', "פסיקה", "פסיקת",
 }
 LEGAL_PHRASES = [
@@ -176,7 +216,7 @@ LEGAL_PHRASES = [
     "צו הגנה", "צו עיכוב יציאה", "צו מניעה", "צו ירושה", "צו קיום צוואה",
     "איזון משאבים", "חלוקת רכוש", "פסק דין", "כתב תביעה",
     "תביעת מזונות", "סרבנות גט", "ייפוי כוח מתמשך", "פקיד סעד", "פקידת סעד",
-    "יישוב סכסוך", "תקנות סדר הדין",
+    "יישוב סכסוך", "תקנות סדר הדין", "ידועים בציבור", "ידועה בציבור",
 ]
 
 
@@ -424,6 +464,44 @@ def content_keys(text):
 
 # ---------------------------------------------------------------- lexicon regex
 
+_HEB_CHAR = re.compile("[" + HEB + "]")
+
+
+def niqqud_tolerant(rx):
+    """Let optional niqqud follow every Hebrew letter or Hebrew class in `rx`.
+
+    "ה?" becomes "(?:ה<NQ>)?", not "ה<NQ>?", so a quantifier still applies to
+    the letter; "[א-ת]+" becomes "(?:[א-ת]<NQ>)+". Escapes are copied as they are.
+    """
+    out, i, n = [], 0, len(rx)
+    while i < n:
+        c = rx[i]
+        if c == "\\":
+            out.append(rx[i:i + 2])
+            i += 2
+            continue
+        if c == "[":
+            j = i + 1
+            if j < n and rx[j] == "^":
+                j += 1
+            if j < n and rx[j] == "]":
+                j += 1
+            while j < n and rx[j] != "]":
+                j += 2 if rx[j] == "\\" else 1
+            atom, i = rx[i:j + 1], j + 1
+            hebrew = bool(_HEB_CHAR.search(atom)) and not atom.startswith("[^")
+        else:
+            atom, i = c, i + 1
+            hebrew = bool(_HEB_CHAR.match(c))
+        if not hebrew:
+            out.append(atom)
+        elif i < n and rx[i] in "?*+{":
+            out.append("(?:" + atom + NQ + ")")
+        else:
+            out.append(atom + NQ)
+    return "".join(out)
+
+
 def lex_regex(entry):
     """Prefix-aware regex for one Hebrew slop.json entry (humanize, detect).
 
@@ -448,8 +526,11 @@ def lex_regex(entry):
             body += r"\s*,?\s*" + re.escape(parts[-1])
         else:
             body = r"\s+".join(re.escape(p) for p in parts)
+    # Niqqud may sit on any letter: "בְּעוֹלָם שֶׁל הַיּוֹם" is still the
+    # phrase, and a deleted phrase takes its marks with it.
+    body = niqqud_tolerant(body)
     tail = r"(?=[" + HEB + r"\"'])" if glued else END_RX
-    return re.compile(r"(?<![\w])(?P<pre>[ובלמשכה]{0,3}?)" + body + tail)
+    return re.compile(r"(?<![\w])(?P<pre>(?:[ובלמשכה]" + NQ + r"){0,3}?)" + body + tail)
 
 
 def lex_label(entry):

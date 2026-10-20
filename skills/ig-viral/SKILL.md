@@ -1,6 +1,6 @@
 ---
 name: ig-viral
-description: מוצא רילס שעובדים בתחום, מדרג לפי מכפיל מעל החציון של כל חשבון, מזהה את נוסחת ההוק ובונה קובץ סוויפ. "מה עובד עכשיו", "קובץ סוויפ". find viral videos, swipe file
+description: "מוצא רילס שעובדים בתחום, מדרג לפי מכפיל מעל החציון של כל חשבון, מזהה את נוסחת ההוק ובונה קובץ סוויפ, ומסמן מה אסור להעתיק לפי כללי הלשכה. \"מה עובד עכשיו\", \"מה עובד אצל עורכי דין אחרים\", \"למה הרילס הזה מתפוצץ\", \"קובץ סוויפ\". find viral videos, swipe file, reverse engineer this account, why is this reel doing numbers, what's working in my niche"
 ---
 
 # ig-viral
@@ -132,8 +132,9 @@ python3 -m yt_dlp --skip-download --write-subs --write-auto-subs --sub-langs "he
 ## שלב 4: לדרג
 
 מלא קובץ מופרד בטאבים עם שורת כותרת והרץ את הסקריפט. החובה: `views` ו-`hook`, ועדיף
-גם `median`. אפשר להשאיר את `flag` כעמודה נוספת. הסקריפט קורא לפי שמות העמודות
-ומתעלם ממה שהוא לא מכיר, אז את הסימון אתה מעביר לדוח בעצמך:
+גם `median`. את הסימון מעמודת `flag` (או `ציות`) הסקריפט מעביר הלאה: הוא מסמן FLAG בטבלה, משאיר
+את השורה מחוץ לספירת "מה עובד", וכותב אותה ב-`swipe.md` עם אזהרה, כדי ש-/ig-reel
+ו-/ig-plan לא יעתיקו פורמט אסור:
 
 ```
 account	followers	median	views	hook	flag
