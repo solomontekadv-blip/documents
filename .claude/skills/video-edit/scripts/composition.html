@@ -1,0 +1,196 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<!--
+  Graphics layer, 1080x1920, transparent. render.mjs calls setup(data) once, then seek(t) per frame.
+  Every animation is a pure function of t: no CSS transitions, no timers, so every frame is exact.
+  Zones (Instagram covers top 220px, bottom 400px, right 130px):
+    #gfx  top half above the face   x 60..890   y 250..940
+    #cap  captions under the face    x 60..890   y 1320..1500
+-->
+<style>
+  :root { --text:#fff; --accent:#FFD400; --card:rgba(12,12,16,.88); --stroke:#000; --font:sans-serif;
+          --cap-color:#fff; --cap-active:#FFD400; --cap-size:76px; --screen-radius:36px; }
+  html, body { margin:0; width:1080px; height:1920px; overflow:hidden; background:transparent;
+               font-family:var(--font); -webkit-font-smoothing:antialiased; }
+  body.storyboard { background-size:cover; background-position:center; }
+  #gfx { position:absolute; left:60px; top:250px; width:830px; height:690px; }
+  .beat { position:absolute; inset:0; display:flex; flex-direction:column; align-items:center;
+          justify-content:center; gap:28px; visibility:hidden; }
+  .beat.row { flex-direction:row; flex-wrap:wrap; }
+  .beat.inline { flex-direction:row; flex-wrap:wrap; align-content:center; gap:4px 26px; }
+  .obj { max-width:100%; opacity:0; transform-origin:50% 50%; }
+  .obj.text { color:var(--text); font-weight:900; line-height:1.04; text-align:center;
+              paint-order:stroke fill;
+              -webkit-text-stroke:10px var(--stroke); text-shadow:0 8px 24px rgba(0,0,0,.45); }
+  .obj.text.accent { color:var(--accent); }
+  .obj.text.card { background:var(--card); -webkit-text-stroke:0; text-shadow:none;
+                   padding:18px 34px; border-radius:28px; }
+  .obj.media { display:block; object-fit:contain; max-width:830px; max-height:690px;
+               filter:drop-shadow(0 18px 40px rgba(0,0,0,.45)); }
+  .obj.media.icon { border-radius:22%; }
+  .obj.media.screen { border-radius:var(--screen-radius); }
+  #cap { position:absolute; left:60px; top:1320px; width:830px; height:180px; display:flex;
+         align-items:center; justify-content:center; flex-wrap:wrap; gap:0 20px; text-align:center;
+         font-weight:900; font-size:var(--cap-size); line-height:1.05; color:var(--cap-color);
+         paint-order:stroke fill; -webkit-text-stroke:12px #000; }
+  #cap .on { color:var(--cap-active); }
+  #zones div { position:absolute; background:rgba(255,0,0,.28); outline:2px dashed #f00; }
+</style>
+</head>
+<body>
+<div id="gfx"></div>
+<div id="cap"></div>
+<div id="zones" hidden>
+  <div style="left:0;top:0;width:1080px;height:220px"></div>
+  <div style="left:0;top:1520px;width:1080px;height:400px"></div>
+  <div style="left:950px;top:220px;width:130px;height:1300px"></div>
+</div>
+<script>
+const SLAM = 0.12;      // seconds from word start to landed
+const FROM = 1.35;      // starting scale: big, then lands at 1.0 with no overshoot
+const ease = p => 1 - Math.pow(1 - p, 3);   // ease-out cubic: monotonic, never passes 1 = no bounce
+let BEATS = [], CHUNKS = [], CAP_ON = true, DURATION = 0;
+
+function css(name, v) { if (v != null) document.documentElement.style.setProperty(name, v); }
+
+window.setup = async (data) => {
+  const b = data.brand || {};
+  document.documentElement.dir = b.direction || 'ltr';
+  document.documentElement.lang = b.lang || 'en';
+  if (b.fontUrl) {
+    const l = document.createElement('link'); l.rel = 'stylesheet'; l.href = b.fontUrl;
+    document.head.appendChild(l);
+    await new Promise(r => { l.onload = r; l.onerror = r; });
+  }
+  css('--font', b.fontFamily ? `"${b.fontFamily}", sans-serif` : null);
+  const c = b.colors || {};
+  css('--text', c.text); css('--accent', c.accent); css('--card', c.card); css('--stroke', c.stroke);
+  const cap = b.captions || {};
+  CAP_ON = cap.enabled !== false;
+  css('--cap-color', cap.color); css('--cap-active', cap.activeColor);
+  if (cap.size) css('--cap-size', cap.size + 'px');
+  const g = b.graphics || {};
+  const sizes = Object.assign({ xl:128, l:100, m:76, s:56 }, g.textSize);
+  if (g.screenRadius != null) css('--screen-radius', g.screenRadius + 'px');
+
+  DURATION = data.duration;
+  const words = data.words;
+  const tAt = o => o.t != null ? o.t : words[o.at].s;
+  const gfx = document.getElementById('gfx');
+  const loads = [];
+  BEATS = data.beats.map((beat, bi) => {
+    const el = document.createElement('div');
+    el.className = 'beat ' + (beat.layout || 'column');
+    el.dataset.beat = beat.id || String(bi);
+    const objs = beat.objects.map((o, oi) => {
+      let node;
+      if (o.kind === 'text') {
+        node = document.createElement('div');
+        node.className = 'obj text' + (o.accent ? ' accent' : '') + (o.card ? ' card' : '');
+        node.textContent = o.text;
+        node.style.fontSize = (typeof o.size === 'number' ? o.size : sizes[o.size || 'l']) + 'px';
+      } else {
+        node = document.createElement(o.kind === 'video' ? 'video' : 'img');
+        node.className = 'obj media ' + (o.style || '');
+        node.src = o.url;
+        if (o.h) node.style.height = o.h + 'px';
+        if (o.w) node.style.width = o.w + 'px';
+        if (o.kind === 'video') { node.muted = true; node.preload = 'auto'; node.playsInline = true; }
+        loads.push(new Promise(r => {
+          if (o.kind === 'video') { node.onloadeddata = r; node.onerror = () => r(o.url); }
+          else { node.onload = r; node.onerror = () => r(o.url); }
+        }));
+      }
+      node.dataset.obj = `${beat.id || bi}/${oi}`;
+      el.appendChild(node);
+      return { node, t: tAt(o), kind: o.kind };
+    });
+    gfx.appendChild(el);
+    return { el, objs, t0: Math.min(...objs.map(o => o.t)) };
+  });
+  BEATS.sort((a, b) => a.t0 - b.t0);
+  BEATS.forEach((b, i) => { b.t1 = i + 1 < BEATS.length ? BEATS[i + 1].t0 : DURATION; });
+
+  // captions: up to maxWords per chunk, break on punctuation or a pause
+  const max = cap.maxWords || 3;
+  let cur = null;
+  words.forEach((w, i) => {
+    const prev = words[i - 1];
+    const brk = !cur || cur.words.length >= max || (prev && (w.s - prev.e > 0.35 || /[.,!?;:]$/.test(prev.w)));
+    if (brk) { cur = { words: [], s: w.s }; CHUNKS.push(cur); }
+    cur.words.push(w); cur.e = w.e;
+  });
+  CHUNKS.forEach(ch => {
+    ch.spans = ch.words.map(w => {
+      const s = document.createElement('span'); s.textContent = w.w.replace(/[.,!?;:]+$/, ''); return s;
+    });
+  });
+
+  await document.fonts.ready;
+  const failed = (await Promise.all(loads)).filter(x => typeof x === 'string');
+  // fonts.check() says true for unknown families, so compare real widths against a fallback instead
+  const ctx = document.createElement('canvas').getContext('2d');
+  const width = f => { ctx.font = `900 60px ${f}`; return ctx.measureText('שלום Hello 123').width; };
+  const fontOk = !b.fontFamily || width(`"${b.fontFamily}", monospace`) !== width('monospace');
+  return { failed, fontOk };
+};
+
+window.seek = async (t) => {
+  const seeks = [];
+  for (const b of BEATS) {
+    const vis = t >= b.t0 && t < b.t1;
+    b.el.style.visibility = vis ? 'visible' : 'hidden';
+    if (!vis) continue;
+    for (const o of b.objs) {
+      const p = (t - o.t) / SLAM;
+      if (p < 0) { o.node.style.opacity = 0; o.node.dataset.state = 'waiting'; continue; }
+      const e = ease(Math.min(p, 1));
+      o.node.style.opacity = Math.min(1, e * 1.6);
+      o.node.style.transform = `scale(${FROM - (FROM - 1) * e})`;
+      o.node.dataset.state = p >= 1 ? 'landed' : 'slamming';
+      if (o.kind === 'video') {
+        const vt = Math.max(0, Math.min(t - o.t, (o.node.duration || 1e9) - 0.05));
+        if (Math.abs(o.node.currentTime - vt) > 0.001) {
+          seeks.push(new Promise(r => { o.node.addEventListener('seeked', r, { once: true }); o.node.currentTime = vt; }));
+        }
+      }
+    }
+  }
+  const capEl = document.getElementById('cap');
+  capEl.replaceChildren();
+  if (CAP_ON) {
+    const ch = CHUNKS.find((c, i) => t >= c.s && t < Math.min(c.e + 0.6, CHUNKS[i + 1] ? CHUNKS[i + 1].s : Infinity));
+    if (ch) ch.spans.forEach((s, i) => { s.className = t >= ch.words[i].s ? 'on' : ''; capEl.appendChild(s); });
+  }
+  await Promise.all(seeks);
+};
+
+// Everything visible at t, for the safe-zone / overlap / crop check.
+window.inspect = () => {
+  const out = [];
+  document.querySelectorAll('[data-obj]').forEach(n => {
+    if (n.closest('.beat').style.visibility !== 'visible' || n.dataset.state !== 'landed') return;
+    const r = n.getBoundingClientRect();
+    const isText = n.classList.contains('text');
+    // tall Hebrew glyphs spill past a tight line box: 'ink' adds that spill for the zone checks
+    const spill = isText ? Math.max(0, n.scrollHeight - n.clientHeight) / 2 : 0;
+    out.push({ id: n.dataset.obj, kind: 'graphic', x: r.left, y: r.top, w: r.width, h: r.height,
+               ink: { y: r.top - spill, h: r.height + 2 * spill },
+               textCrop: isText && n.scrollWidth > n.clientWidth + 1 });
+  });
+  const cap = document.getElementById('cap');
+  if (cap.children.length) {
+    const r = document.createRange(); r.selectNodeContents(cap); const b = r.getBoundingClientRect();
+    out.push({ id: 'captions', kind: 'caption', x: b.left, y: b.top, w: b.width, h: b.height,
+               ink: { y: b.top, h: b.height }, textCrop: b.height > cap.clientHeight + 1 });
+  }
+  return out;
+};
+
+window.showZones = on => { document.getElementById('zones').hidden = !on; };
+window.setBackground = url => { document.body.classList.add('storyboard'); document.body.style.backgroundImage = `url("${url}")`; };
+</script>
+</body>
+</html>

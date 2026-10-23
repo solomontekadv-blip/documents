@@ -1,0 +1,38 @@
+{
+  "_help": "One beat per graphic. A beat starts on the word of its first object and lasts until the next beat starts. 'at' is a word index in build/words_cut.json. Each object slams in on its own word. layout: column | row | inline. kind: text | image | video.",
+  "beats": [
+    {
+      "id": "hook",
+      "layout": "inline",
+      "objects": [
+        { "kind": "text", "text": "3", "at": 0, "size": "xl", "accent": true },
+        { "kind": "text", "text": "כלים", "at": 1, "size": "xl" },
+        { "kind": "text", "text": "שחוסכים", "at": 2, "size": "xl" },
+        { "kind": "text", "text": "לי", "at": 3, "size": "xl" },
+        { "kind": "text", "text": "שעתיים", "at": 4, "size": "xl", "accent": true }
+      ]
+    },
+    {
+      "id": "tool-1",
+      "layout": "column",
+      "objects": [
+        { "kind": "image", "src": "assets/icons/notion.png", "at": 7, "h": 260, "style": "icon" },
+        { "kind": "text", "text": "Notion", "at": 8, "size": "l" }
+      ]
+    },
+    {
+      "id": "tool-1-screen",
+      "layout": "column",
+      "objects": [
+        { "kind": "image", "src": "assets/screens/notion-board.png", "at": 12, "h": 640, "style": "screen" }
+      ]
+    },
+    {
+      "id": "demo",
+      "layout": "column",
+      "objects": [
+        { "kind": "video", "src": "assets/screens/demo.webm", "at": 16, "h": 640, "style": "screen" }
+      ]
+    }
+  ]
+}
