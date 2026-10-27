@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="he" dir="rtl"><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700;800;900&family=Frank+Ruhl+Libre:wght@700;900&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#0a1a36;--navy2:#13306a;--gold:#d9b25f;--gold2:#f3d892;--ink:#eef2fa;--muted:#b9c6de}
+*{margin:0;padding:0;box-sizing:border-box}
+body{width:1080px;height:1350px;overflow:hidden;background:var(--navy);font-family:'Heebo',sans-serif;color:var(--ink)}
+.poster{position:relative;width:1080px;height:1350px;overflow:hidden;
+  background:radial-gradient(ellipse 560px 640px at 400px 720px,#2a54a3 0%,#1a3a76 38%,rgba(10,26,54,0) 75%),
+             linear-gradient(160deg,#0d2147 0%,#0a1a36 55%,#081530 100%)}
+.path{position:absolute;inset:0;pointer-events:none}
+.person{position:absolute;left:-205px;bottom:-150px;width:860px;z-index:2;filter:drop-shadow(0 0 40px rgba(120,160,230,.25))}
+.top{position:absolute;top:58px;right:64px;left:64px;z-index:3}
+.badge{display:inline-flex;align-items:center;gap:10px;border:2px solid var(--gold);color:var(--gold2);padding:8px 22px;border-radius:40px;font-weight:700;font-size:24px;letter-spacing:.5px}
+.badge i{width:9px;height:9px;border-radius:50%;background:var(--gold)}
+.hook{margin-top:26px;font-weight:900;line-height:1.08}
+.hook .l1{font-size:66px;color:#fff}
+.hook .l2{font-size:66px;color:var(--gold2)}
+.hook .l3{font-size:42px;font-weight:400;color:var(--muted);margin-top:12px}
+.col{position:absolute;top:428px;right:60px;width:470px;z-index:3}
+.title{font-family:'Frank Ruhl Libre',serif;font-weight:900;font-size:100px;line-height:1;white-space:nowrap;
+  background:linear-gradient(180deg,#f8e3a6 0%,#d9b25f 55%,#b88a35 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.sub{font-size:28px;font-weight:500;margin-top:10px;color:#fff}
+.rule{height:3px;width:120px;background:var(--gold);margin:24px 0 22px}
+.q{list-style:none}
+.q li{position:relative;padding-right:30px;font-size:26px;line-height:1.3;font-weight:500;margin-bottom:16px;color:#fff}
+.q li::before{content:"";position:absolute;right:0;top:12px;width:12px;height:12px;border:2.5px solid var(--gold);border-radius:50%}
+.bio{font-size:23px;line-height:1.5;color:var(--muted);margin-top:26px;font-weight:400}
+.bio b{color:#fff;font-weight:700}
+.st{margin-top:26px;padding-right:18px;border-right:3px solid var(--gold);font-size:22px;font-weight:700;color:var(--gold2);line-height:1.45}
+.st span{display:block;color:#fff;font-weight:500;font-size:21px}
+.bottom{position:absolute;left:0;right:0;bottom:0;z-index:4;padding:24px 64px 30px;
+  background:linear-gradient(180deg,rgba(8,21,48,0) 0%,rgba(8,21,48,.92) 28%,#081530 100%)}
+.aud{font-size:22px;color:var(--muted);font-weight:400;margin-top:40px}
+.aud b{color:#fff;font-weight:700}
+.cta{margin-top:16px;display:flex;align-items:center;justify-content:space-between;gap:20px;
+  background:linear-gradient(90deg,#c99a45,#f1d58d 50%,#c99a45);border-radius:18px;padding:18px 30px;color:#0a1a36}
+.cta .t{font-size:24px;font-weight:700;line-height:1.25}
+.cta .t span{display:block;font-size:20px;font-weight:500;opacity:.85}
+.cta .ph{font-size:46px;font-weight:900;direction:ltr;letter-spacing:1px;white-space:nowrap}
+</style></head><body>
+<div class="poster">
+  <svg class="path" viewBox="0 0 1080 1350">
+    <circle cx="1016" cy="392" r="6" fill="#d9b25f"/><circle cx="40" cy="300" r="6" fill="#d9b25f" fill-opacity=".6"/>
+    <path d="M1016 392 C 840 420, 700 360, 560 380 S 260 430, 40 300" fill="none" stroke="#d9b25f" stroke-opacity=".35" stroke-width="2.5" stroke-dasharray="2 12" stroke-linecap="round"/>
+  </svg>
+  <img class="person" src="cutout.png" alt="">
+  <div class="top">
+    <div class="badge"><i></i>לקראת שבוע הסיגד</div>
+    <div class="hook">
+      <div class="l1">בגיל 13 הוא ברח מאתיופיה.</div>
+      <div class="l2">היום הוא עורך דין.</div>
+      <div class="l3">מה קרה בדרך?</div>
+    </div>
+  </div>
+  <div class="col">
+    <div class="title">נתיב האומץ</div>
+    <div class="sub">הרצאתו של עו״ד סולומון טקה</div>
+    <div class="rule"></div>
+    <ul class="q">
+      <li>איך ממשיכים ללכת כשהדרך לא מוכרת?</li>
+      <li>איך מוצאים שייכות כשמרגישים שונים?</li>
+      <li>איך בוחרים מי להיות, גם כשהנסיבות בוחרות בשבילנו?</li>
+    </ul>
+    <p class="bio">מאתיופיה, דרך סודן, לישראל. היום:<br><b>עורך דין, אקטיביסט למען זכויות אדם<br>ומחבר הספר ״נתיב האומץ״.</b></p>
+    <p class="st"><span>הרצאה אישית ב-5 תחנות במסע</span>מי אני? לאן אני שייך? איך בוחרים בדרך שלי?</p>
+  </div>
+  <div class="bottom">
+    <div class="aud">מותאם ל<b>חטיבות ביניים, תיכונים ומכינות</b> · עותקי הספר לספריית בית הספר במחיר מוזל</div>
+    <div class="cta">
+      <div class="t">לתיאום הרצאה ולשמירת תאריך<span>סולומון טקה, עו״ד</span></div>
+      <div class="ph">052-3700918</div>
+    </div>
+  </div>
+</div>
+</body></html>
